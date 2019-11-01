@@ -2,4 +2,5 @@
 /ArnoldVinkTools/obj
 /Updater/obj
 *.user
+*.pfx
 *.vs
