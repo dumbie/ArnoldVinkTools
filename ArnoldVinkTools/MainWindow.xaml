@@ -1,0 +1,112 @@
+﻿<Window x:Class="ArnoldVinkTools.MainPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="Settings"
+
+        ResizeMode="CanMinimize" 
+        Icon="Resources/ArnoldVinkTools.jpg"
+
+        MaxHeight="410" MaxWidth="500"
+        MinHeight="410" MinWidth="500"
+        Height="410" Width="500">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Listbox Menu -->
+        <ListBox Grid.Column="0" Name="lb_SettingsListBox" Width="150" Background="#00C7FF" Foreground="White" SelectedIndex="0" SelectionMode="Single" Margin="0,0,10,0" Style="{StaticResource ListBox}">
+            <ListBoxItem>
+                <TextBlock Text="General" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="TimeMe Tile" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <TextBlock Text="Media Remote" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
+            </ListBoxItem>
+            <!--<ListBoxItem>
+                    <TextBlock Text="Stream VR" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
+                </ListBoxItem>-->
+            <ListBoxItem>
+                <TextBlock Text="Help" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
+            </ListBoxItem>
+        </ListBox>
+
+        <!-- General Tab -->
+        <StackPanel Grid.Column="1">
+            <StackPanel Name="sp_GeneralTab">
+                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">General Settings</TextBlock>
+
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource TextBlockBlack}">Arnold Vink Tools Server Port *</TextBlock>
+                <TextBox Name="txt_ServerPort" Style="{StaticResource TextBox}" Width="150"/>
+
+                <CheckBox Margin="0,15,0,0" Name="cb_StartupWindows" Content="Launch on Windows startup." Style="{StaticResource CheckBox}"/>
+
+                <TextBlock Margin="0,10,0,0" Style="{StaticResource TextBlockLightGray}">* Requires tools restart to take effect.</TextBlock>
+
+                <Button Name="btn_CheckVersion" Style="{StaticResource ButtonAccent}" Margin="0,15,0,0" Content="Check for new update" Click="btn_CheckVersion_Click"/>
+                <Button Name="btn_ShowIpAdres" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Show my IP adres" Click="btn_ShowIpAdres_Click"/>
+                <Button Name="btn_RestartTools" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Restart the tools" Click="btn_RestartTools_Click"/>
+                <Button Name="btn_ProjectWebsite" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Project website" Click="btn_ProjectWebsite_Click"/>
+                <Button Name="btn_ExitTools" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Exit the tools" Click="btn_ExitTools_Click"/>
+            </StackPanel>
+
+            <!-- TimeMe Tab -->
+            <StackPanel Name="sp_TimeMeTab" Visibility="Collapsed">
+                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">TimeMe Tile Settings</TextBlock>
+
+                <CheckBox Name="cb_TimeMeWallpaper" Margin="0,5,0,0" Content="Set wallpaper on your desktop *" Style="{StaticResource CheckBox}"/>
+
+                <StackPanel Name="sp_TimeMeWallpaper" Visibility="Collapsed" Margin="0,10,0,0">
+                    <TextBlock Style="{StaticResource TextBlockBlack}">Current TimeMe wallpaper:</TextBlock>
+                    <Image Name="image_TimeMeWallpaper" Width="300" HorizontalAlignment="Left"/>
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource TextBlockLightGray}" Margin="0,15,0,0">* Requires tools restart to take effect.</TextBlock>
+
+                <TextBlock Style="{StaticResource TextBlockLightGray}" Margin="0,15,0,0" TextWrapping="Wrap">To enable battery support in the Windows 8 version of TimeMe you need to run Arnold Vink Tools as Administrator once to allow access.</TextBlock>
+            </StackPanel>
+
+            <!-- Media Remote Tab -->
+            <StackPanel Name="sp_MediaRemoteTab" Visibility="Collapsed">
+                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">Media Remote Settings</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockLightGray}" TextWrapping="Wrap" Margin="0,5,0,0">This tool only receives media commands, all settings are managed in the application.</TextBlock>
+            </StackPanel>
+
+            <!-- StreamVR Tab -->
+            <StackPanel Name="sp_StreamVRTab" Visibility="Collapsed">
+                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">StreamVR Settings</TextBlock>
+
+                <CheckBox Name="cb_StreamVRFakeSBS" Margin="0,5,0,0" Content="Fake3D effect for VR glasses." Style="{StaticResource CheckBox}"/>
+                <CheckBox Margin="0,10,0,0" Name="cb_StreamVRShowMouse" Content="Show custom mouse pointer." Style="{StaticResource CheckBox}"/>
+                <ComboBox>limit resolution</ComboBox>
+                <ComboBox>maximum fps</ComboBox>
+                <ComboBox>select monitor</ComboBox>
+
+                <TextBlock Style="{StaticResource TextBlockBlack}">Select VR Head Mount Model</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockLightGray}">Select your VR headmount model:</TextBlock>
+                <ComboBox>
+                    <ComboBoxItem>Generic 3D VR Headset</ComboBoxItem>
+                </ComboBox>
+
+                <Button Name="btn_OpenTrackWebsite" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="OpenTrack Website"></Button>
+                <Image Name="image_StreamVRPreview"></Image>
+
+                <TextBlock Style="{StaticResource TextBlockLightGray}">* Some settings might require a video stream restart to take effect.</TextBlock>
+            </StackPanel>
+
+            <!-- Help Tab -->
+            <StackPanel Name="stackpanel_HelpTextTab" Visibility="Collapsed">
+                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">Help</TextBlock>
+                <StackPanel Margin="0,5,0,0" Name="stackpanel_HelpText"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

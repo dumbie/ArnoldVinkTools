@@ -1,0 +1,83 @@
+﻿using ArnoldVinkCode;
+using Microsoft.Win32;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows;
+using System.Windows.Media.Imaging;
+
+namespace ArnoldVinkTools
+{
+    partial class MainPage
+    {
+        //Application Dll Imports
+        [DllImport("User32.dll")]
+        static extern Int32 SystemParametersInfo(UInt32 uiAction, UInt32 uiParam, String pvParam, UInt32 fWinIni);
+
+        //Start checking for TimeMe wallpaper
+        void StartCheckWallpaper()
+        {
+            try
+            {
+                Debug.WriteLine("Checking for TimeMe wallpaper...");
+                while (AVActions.TaskRunningCheck(vCheckWallpaperToken))
+                {
+                    //Check for current jpg wallpaper file
+                    string WallpaperLocationJpg = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.jpg";
+                    CheckAndSetWallpaper(WallpaperLocationJpg);
+
+                    //Check for current png wallpaper file
+                    string WallpaperLocationPng = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.png";
+                    CheckAndSetWallpaper(WallpaperLocationPng);
+
+                    Thread.Sleep(600000);
+                }
+            }
+            catch { }
+        }
+
+        private void CheckAndSetWallpaper(string WallpaperLocation)
+        {
+            try
+            {
+                if (File.Exists(WallpaperLocation))
+                {
+                    //Set and check current wallpaper file size
+                    long WallpaperFilesizeOld = vWallpaperFilesize;
+                    vWallpaperFilesize = new FileInfo(WallpaperLocation).Length;
+                    if (WallpaperFilesizeOld != vWallpaperFilesize)
+                    {
+                        //Set Registery to Stretch
+                        RegistryKey WallRegistryKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop", true);
+                        WallRegistryKey.SetValue("WallpaperStyle", "2");
+                        WallRegistryKey.SetValue("TileWallpaper", "0");
+
+                        //Set current TimeMe Wallpaper
+                        SystemParametersInfo(20, 0, WallpaperLocation, 0x1);
+
+                        //Update TimeMe Preview
+                        Dispatcher.Invoke(delegate ()
+                        {
+                            sp_TimeMeWallpaper.Visibility = Visibility.Visible;
+
+                            //Load the wallpaper as bitmapimage
+                            BitmapImage ImageToBitmapImage = new BitmapImage();
+                            ImageToBitmapImage.BeginInit();
+                            ImageToBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                            ImageToBitmapImage.UriSource = new Uri(WallpaperLocation, UriKind.RelativeOrAbsolute);
+                            ImageToBitmapImage.EndInit();
+                            image_TimeMeWallpaper.Source = ImageToBitmapImage;
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(delegate () { sp_TimeMeWallpaper.Visibility = Visibility.Collapsed; });
+                    }
+                }
+            }
+            catch { }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+/ArnoldVinkTools/bin
+/ArnoldVinkTools/obj
+/Updater/obj
+*.user
+*.vs
