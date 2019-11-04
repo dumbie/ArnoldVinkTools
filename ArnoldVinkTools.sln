@@ -6,11 +6,12 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArnoldVinkTools", "ArnoldVinkTools\ArnoldVinkTools.csproj", "{137B6FD2-DDAE-4995-8F44-41AA6BD6EE0A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E6463844-5091-497C-B107-8DC8D9DF4D36} = {E6463844-5091-497C-B107-8DC8D9DF4D36}
+		{0DC13C50-62EE-4E92-AF8C-789B35769E8D} = {0DC13C50-62EE-4E92-AF8C-789B35769E8D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{E6463844-5091-497C-B107-8DC8D9DF4D36}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArnoldVinkTools-Admin", "ArnoldVinkTools-Admin\ArnoldVinkTools-Admin.csproj", "{0DC13C50-62EE-4E92-AF8C-789B35769E8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{E6463844-5091-497C-B107-8DC8D9DF4D36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +23,14 @@ Global
 		{137B6FD2-DDAE-4995-8F44-41AA6BD6EE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{137B6FD2-DDAE-4995-8F44-41AA6BD6EE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{137B6FD2-DDAE-4995-8F44-41AA6BD6EE0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DC13C50-62EE-4E92-AF8C-789B35769E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0DC13C50-62EE-4E92-AF8C-789B35769E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DC13C50-62EE-4E92-AF8C-789B35769E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DC13C50-62EE-4E92-AF8C-789B35769E8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6463844-5091-497C-B107-8DC8D9DF4D36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

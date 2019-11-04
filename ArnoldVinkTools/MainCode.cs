@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static ArnoldVinkTools.AppLaunchCheck;
 
 namespace ArnoldVinkTools
 {
@@ -19,7 +20,7 @@ namespace ArnoldVinkTools
         public async Task MainStartup()
         {
             //Initialize application
-            await StartupCheck();
+            Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
             TrayMenu();
 
             //Check application settings
@@ -130,7 +131,7 @@ namespace ArnoldVinkTools
         }
 
         //Open the project website
-        private void btn_ProjectWebsite_Click(object sender, RoutedEventArgs e) { Process.Start("http://projects.arnoldvink.com"); }
+        private void btn_ProjectWebsite_Click(object sender, RoutedEventArgs e) { Process.Start("https://projects.arnoldvink.com"); }
 
         //Hide the window instead of closing it
         private void Window_Closing(object sender, CancelEventArgs e)

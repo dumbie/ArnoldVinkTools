@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
-using static ArnoldVinkCode.ArnoldVinkProcesses;
+using static ArnoldVinkCode.ProcessWin32Functions;
 
 namespace AdminLauncher
 {

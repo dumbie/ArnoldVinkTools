@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
 //General Information about assembly
-[assembly: AssemblyTitle("AV Tools Updater")]
-[assembly: AssemblyProduct("AV Tools Updater")]
-[assembly: AssemblyDescription("AV Tools Updater")]
+[assembly: AssemblyTitle("Application Updater")]
+[assembly: AssemblyProduct("Application Updater")]
+[assembly: AssemblyDescription("Application Updater")]
 [assembly: AssemblyCompany("Arnold Vink")]
 [assembly: AssemblyCopyright("Copyright © Arnold Vink")]

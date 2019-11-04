@@ -7,9 +7,9 @@
         Closing="Window_Closing"
         Title="Settings"
         ResizeMode="CanMinimize"
-        MaxHeight="410" MaxWidth="500"
-        MinHeight="410" MinWidth="500"
-        Height="410" Width="500">
+        MaxHeight="450" MaxWidth="500"
+        MinHeight="450" MinWidth="500"
+        Height="450" Width="500">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,65 +18,68 @@
         </Grid.ColumnDefinitions>
 
         <!-- Listbox Menu -->
-        <ListBox Grid.Column="0" Name="lb_SettingsListBox" Width="150" Background="#00C7FF" Foreground="White" SelectedIndex="0" SelectionMode="Single" Margin="0,0,10,0" Style="{StaticResource ListBox}">
-            <ListBoxItem>
-                <TextBlock Text="General" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <TextBlock Text="TimeMe Tile" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <TextBlock Text="Media Remote" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
-            </ListBoxItem>
-            <ListBoxItem>
-                <TextBlock Text="Help" Style="{StaticResource TextBlockSettingTitleWhiteNormal}"/>
-            </ListBoxItem>
-        </ListBox>
+        <Grid Grid.Column="0" Background="{DynamicResource ApplicationAccentLightBrush}">
+            <ListBox Name="lb_SettingsListBox" Width="150" SelectedIndex="0" SelectionMode="Single" Style="{StaticResource ListBoxVertical}">
+                <ListBoxItem>
+                    <TextBlock Text="General" Style="{StaticResource TextBlockWhite}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="TimeMe Tile" Style="{StaticResource TextBlockWhite}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="Media Remote" Style="{StaticResource TextBlockWhite}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="Help" Style="{StaticResource TextBlockWhite}"/>
+                </ListBoxItem>
+            </ListBox>
+        </Grid>
 
         <!-- General Tab -->
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="10,5,10,5">
             <StackPanel Name="sp_GeneralTab">
-                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">General Settings</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockBlack}" FontSize="{StaticResource TextSizeMedium}" Text="General Settings"/>
 
-                <TextBlock Margin="0,5,0,0" Style="{StaticResource TextBlockBlack}">Arnold Vink Tools Server Port *</TextBlock>
-                <TextBox Name="txt_ServerPort" Style="{StaticResource TextBox}" Width="150"/>
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource TextBlockBlack}" Text="Arnold Vink Tools Server Port *"/>
+                <TextBox Name="txt_ServerPort" HorizontalAlignment="Left" Style="{StaticResource TextBoxBlack}" Width="150"/>
 
-                <CheckBox Margin="0,15,0,0" Name="cb_StartupWindows" Content="Launch on Windows startup." Style="{StaticResource CheckBox}"/>
+                <CheckBox Margin="0,15,0,0" Name="cb_StartupWindows" Content="Launch on Windows startup." Style="{StaticResource CheckBoxBlack}"/>
 
-                <TextBlock Margin="0,10,0,0" Style="{StaticResource TextBlockLightGray}">* Requires tools restart to take effect.</TextBlock>
+                <TextBlock Margin="0,10,0,0" Style="{StaticResource TextBlockGray}" Text="* Requires tools restart to take effect."/>
 
-                <Button Name="btn_CheckVersion" Style="{StaticResource ButtonAccent}" Margin="0,15,0,0" Content="Check for new update" Click="btn_CheckVersion_Click"/>
-                <Button Name="btn_ShowIpAdres" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Show my IP adres" Click="btn_ShowIpAdres_Click"/>
-                <Button Name="btn_RestartTools" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Restart the tools" Click="btn_RestartTools_Click"/>
-                <Button Name="btn_ProjectWebsite" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Project website" Click="btn_ProjectWebsite_Click"/>
-                <Button Name="btn_ExitTools" Style="{StaticResource ButtonAccent}" Margin="0,5,0,0" Content="Exit the tools" Click="btn_ExitTools_Click"/>
+                <Button Name="btn_CheckVersion" Style="{StaticResource ButtonAccentBlack}" Margin="0,15,0,0" Content="Check for new update" Click="btn_CheckVersion_Click"/>
+                <Button Name="btn_ShowIpAdres" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Show my IP adres" Click="btn_ShowIpAdres_Click"/>
+                <Button Name="btn_RestartTools" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Restart the tools" Click="btn_RestartTools_Click"/>
+                <Button Name="btn_ProjectWebsite" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Project website" Click="btn_ProjectWebsite_Click"/>
+                <Button Name="btn_ExitTools" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Exit the tools" Click="btn_ExitTools_Click"/>
             </StackPanel>
 
             <!-- TimeMe Tab -->
             <StackPanel Name="sp_TimeMeTab" Visibility="Collapsed">
-                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">TimeMe Tile Settings</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockBlack}" FontSize="{StaticResource TextSizeMedium}" Text="TimeMe Tile Settings"/>
 
-                <CheckBox Name="cb_TimeMeWallpaper" Margin="0,5,0,0" Content="Set wallpaper on your desktop *" Style="{StaticResource CheckBox}"/>
+                <CheckBox Name="cb_TimeMeWallpaper" Margin="0,5,0,0" Content="Set wallpaper on your desktop *" Style="{StaticResource CheckBoxBlack}"/>
 
                 <StackPanel Name="sp_TimeMeWallpaper" Visibility="Collapsed" Margin="0,10,0,0">
                     <TextBlock Style="{StaticResource TextBlockBlack}">Current TimeMe wallpaper:</TextBlock>
                     <Image Name="image_TimeMeWallpaper" Width="300" HorizontalAlignment="Left"/>
                 </StackPanel>
 
-                <TextBlock Style="{StaticResource TextBlockLightGray}" Margin="0,15,0,0">* Requires tools restart to take effect.</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockGray}" Margin="0,15,0,0">* Requires tools restart to take effect.</TextBlock>
 
-                <TextBlock Style="{StaticResource TextBlockLightGray}" Margin="0,15,0,0" TextWrapping="Wrap">To enable battery support in the Windows 8 version of TimeMe you need to run Arnold Vink Tools as Administrator once to allow access.</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockGray}" Margin="0,15,0,0" TextWrapping="Wrap">To enable battery support in the Windows 8 version of TimeMe you need to run Arnold Vink Tools as Administrator once to allow access.</TextBlock>
             </StackPanel>
 
             <!-- Media Remote Tab -->
             <StackPanel Name="sp_MediaRemoteTab" Visibility="Collapsed">
-                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">Media Remote Settings</TextBlock>
-                <TextBlock Style="{StaticResource TextBlockLightGray}" TextWrapping="Wrap" Margin="0,5,0,0">This tool only receives media commands, all settings are managed in the application.</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockBlack}" FontSize="{StaticResource TextSizeMedium}" Text="Media Remote Settings"/>
+
+                <TextBlock Style="{StaticResource TextBlockGray}" TextWrapping="Wrap" Margin="0,5,0,0">This tool only receives media commands, all settings are managed in the application.</TextBlock>
             </StackPanel>
 
             <!-- Help Tab -->
             <StackPanel Name="stackpanel_HelpTextTab" Visibility="Collapsed">
-                <TextBlock Style="{StaticResource TextBlockPageTitleBlack}">Help</TextBlock>
+                <TextBlock Style="{StaticResource TextBlockBlack}" FontSize="{StaticResource TextSizeMedium}" Text="Help"/>
                 <StackPanel Margin="0,5,0,0" Name="stackpanel_HelpText"/>
             </StackPanel>
         </StackPanel>

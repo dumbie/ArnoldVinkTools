@@ -42,7 +42,7 @@ namespace ArnoldVinkTools
                 //Send response message
                 byte[] bytesResponse = Encoding.UTF8.GetBytes(StringResponse);
                 await tcpClient.GetStream().WriteAsync(bytesResponse, 0, bytesResponse.Length);
-                Debug.WriteLine("Sended response: " + StringResponse);
+                Debug.WriteLine("Sended response (S): " + StringResponse);
             }
             catch { }
         }
