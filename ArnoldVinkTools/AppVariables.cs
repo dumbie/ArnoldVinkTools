@@ -1,15 +1,18 @@
 ﻿using ArnoldVinkCode;
 using System.Configuration;
-using System.Windows;
+using System.Globalization;
 
 namespace ArnoldVinkTools
 {
-    partial class MainPage : Window
+    partial class AppVariables
     {
         //Application Variables
-        Configuration vConfiguration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        long vWallpaperFilesize = 0;
-        bool vCheckingForUpdate = false;
+        public static Configuration vConfiguration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public static CultureInfo vAppCultureInfo = CultureInfo.InvariantCulture;
+        public static long vWallpaperFilesize = 0;
+
+        //Update Variables
+        public static bool vCheckingForUpdate = false;
 
         //Socket Variables
         public static ArnoldVinkSocketServer vSocketServer = new ArnoldVinkSocketServer();

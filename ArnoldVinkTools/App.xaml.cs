@@ -4,10 +4,13 @@ namespace ArnoldVinkTools
 {
     public partial class App : Application
     {
+        //Application windows
+        public static MainPage vMainPage = new MainPage();
+
+        //Application startup
         protected override async void OnStartup(StartupEventArgs e)
         {
-            MainPage MainStartup = new MainPage();
-            await MainStartup.MainStartup();
+            await vMainPage.Startup();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using ArnoldVinkCode;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -7,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using static ArnoldVinkCode.AVActions;
+using static ArnoldVinkTools.AppVariables;
 
 namespace ArnoldVinkTools
 {
@@ -22,7 +23,7 @@ namespace ArnoldVinkTools
             try
             {
                 Debug.WriteLine("Checking for TimeMe wallpaper...");
-                while (AVActions.TaskRunningCheck(vCheckWallpaperToken))
+                while (TaskRunningCheck(vCheckWallpaperToken))
                 {
                     //Check for current jpg wallpaper file
                     string WallpaperLocationJpg = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.jpg";

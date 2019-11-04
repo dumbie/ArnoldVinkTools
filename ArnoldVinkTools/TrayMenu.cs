@@ -57,12 +57,15 @@ namespace ArnoldVinkTools
             catch { }
         }
 
-        void OnWebsite(object sender, EventArgs e) { Process.Start("http://projects.arnoldvink.com"); }
+        void OnWebsite(object sender, EventArgs e) { Process.Start("https://projects.arnoldvink.com"); }
 
-        void OnExit(object sender, EventArgs e)
+        async void OnExit(object sender, EventArgs e)
         {
-            TrayNotifyIcon.Visible = false;
-            Environment.Exit(0);
+            try
+            {
+                await Application_Exit();
+            }
+            catch { }
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Updater
             {
                 //Check if previous update files are in the way
                 if (File.Exists("UpdaterNew.exe")) { try { File.Delete("UpdaterNew.exe"); } catch { } }
-                if (File.Exists("App-Update.zip")) { try { File.Delete("App-Update.zip"); } catch { } }
+                if (File.Exists("AppUpdate.zip")) { try { File.Delete("AppUpdate.zip"); } catch { } }
 
                 //Check if application is running and close it
                 bool AppRunning = false;
@@ -58,7 +58,6 @@ namespace Updater
                 {
                     AppRunning = true;
                     CloseProcess.Kill();
-
                 }
 
                 //Wait for applications to have closed
@@ -74,7 +73,7 @@ namespace Updater
                         ProgressBarUpdate(Args.ProgressPercentage, false);
                         TextBlockUpdate("Downloading update file: " + Args.ProgressPercentage + "%");
                     };
-                    await WebClient.DownloadFileTaskAsync(new Uri("http://download.arnoldvink.com/?dl=ArnoldVinkTools.zip"), "App-Update.zip");
+                    await WebClient.DownloadFileTaskAsync(new Uri("http://download.arnoldvink.com/?dl=ArnoldVinkTools.zip"), "AppUpdate.zip");
                     Debug.WriteLine("Update file has been downloaded");
                 }
                 catch
@@ -87,7 +86,7 @@ namespace Updater
                 {
                     //Extract the downloaded update archive
                     TextBlockUpdate("Updating the application to the latest version.");
-                    using (ZipArchive ZipArchive = ZipFile.OpenRead("App-Update.zip"))
+                    using (ZipArchive ZipArchive = ZipFile.OpenRead("AppUpdate.zip"))
                     {
                         foreach (ZipArchiveEntry ZipFile in ZipArchive.Entries)
                         {
@@ -119,16 +118,16 @@ namespace Updater
 
                 //Delete the update installation zip file
                 TextBlockUpdate("Cleaning up the update installation files.");
-                if (File.Exists("App-Update.zip"))
+                if (File.Exists("AppUpdate.zip"))
                 {
-                    Debug.WriteLine("Removing: App-Update.zip");
-                    File.Delete("App-Update.zip");
+                    Debug.WriteLine("Removing: AppUpdate.zip");
+                    File.Delete("AppUpdate.zip");
                 }
 
                 //Start application after the update has completed.
                 if (AppRunning)
                 {
-                    TextBlockUpdate("Running the updated version of Arnold Vink Tools.");
+                    TextBlockUpdate("Running the updated version of the application.");
                     ProcessLauncherWin32("ArnoldVinkTools-Admin.exe", "", "", false, false);
                 }
 
@@ -156,10 +155,10 @@ namespace Updater
                 Debug.WriteLine("Exiting Updater.");
 
                 //Delete the update installation zip file
-                if (File.Exists("App-Update.zip"))
+                if (File.Exists("AppUpdate.zip"))
                 {
-                    Debug.WriteLine("Removing: App-Update.zip");
-                    File.Delete("App-Update.zip");
+                    Debug.WriteLine("Removing: AppUpdate.zip");
+                    File.Delete("AppUpdate.zip");
                 }
 
                 //Set the exit reason text message

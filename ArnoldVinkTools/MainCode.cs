@@ -3,48 +3,72 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using static ArnoldVinkCode.ProcessWin32Functions;
 using static ArnoldVinkTools.AppLaunchCheck;
+using static ArnoldVinkTools.AppVariables;
 
 namespace ArnoldVinkTools
 {
     partial class MainPage
     {
-        //Application Startup
-        public async Task MainStartup()
+        //Window Startup
+        public async Task Startup()
         {
-            //Initialize application
-            Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
-            TrayMenu();
-
-            //Check application settings
-            Settings_Check();
-            Settings_Load();
-            Settings_Save();
-
-            //Load help text
-            Help_Load();
-
-            //Whitelist supported windows store apps
-            WhitelistApps();
-
-            //Enable the socket server
-            vSocketServer.vTcpListenerPort = 1000;
-            await vSocketServer.SocketServerSwitch(false, false);
-            vSocketServer.EventBytesReceived += ReceivedSocketHandler;
-
-            //Start checking for TimeMe wallpaper
-            if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
+            try
             {
-                vCheckWallpaperToken = new CancellationTokenSource();
-                vCheckWallpaperTask = AVActions.TaskStart(StartCheckWallpaper, vCheckWallpaperToken);
+                //Initialize application
+                Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
+                TrayMenu();
+
+                //Check application settings
+                Settings_Check();
+                Settings_Load();
+                Settings_Save();
+
+                //Load help text
+                Help_Load();
+
+                //Whitelist supported windows store apps
+                WhitelistApps();
+
+                //Enable the socket server
+                vSocketServer.vTcpListenerPort = 1000;
+                await vSocketServer.SocketServerSwitch(false, false);
+                vSocketServer.EventBytesReceived += ReceivedSocketHandler;
+
+                //Start checking for TimeMe wallpaper
+                if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
+                {
+                    vCheckWallpaperToken = new CancellationTokenSource();
+                    vCheckWallpaperTask = AVActions.TaskStart(StartCheckWallpaper, vCheckWallpaperToken);
+                }
+
+                ////Check for available application update
+                //if (DateTime.Now.Subtract(DateTime.Parse(ConfigurationManager.AppSettings["AppUpdateCheck"], vAppCultureInfo)).Days >= 5)
+                //{
+                //    await AppUpdate.CheckForAppUpdate(true);
+                //}
+                Debug.WriteLine("Application has launched.");
             }
+            catch { }
+        }
+
+        //Close the application
+        public async Task Application_Exit()
+        {
+            try
+            {
+                await vSocketServer.SocketServerDisable();
+
+                TrayNotifyIcon.Visible = false;
+                Environment.Exit(0);
+            }
+            catch { }
         }
 
         //Check for application update
@@ -52,35 +76,9 @@ namespace ArnoldVinkTools
         {
             try
             {
-                if (!vCheckingForUpdate)
-                {
-                    vCheckingForUpdate = true;
-
-                    //Download Current Version
-                    string ResCurrentVersion = await AVDownloader.DownloadStringAsync(5000, "Arnold Vink Tools", null, new Uri("http://download.arnoldvink.com/ArnoldVinkTools.zip-version.txt" + "?nc=" + Environment.TickCount));
-                    if (ResCurrentVersion != Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0])
-                    {
-                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: v" + ResCurrentVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
-                        if (Result == MessageBoxResult.Yes)
-                        {
-                            TrayNotifyIcon.Visible = false;
-                            Process.Start(Directory.GetCurrentDirectory() + "\\Updater.exe");
-                            Environment.Exit(0);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No new update has been found.", "Arnold Vink Tools");
-                    }
-
-                    vCheckingForUpdate = false;
-                }
+                await AppUpdate.CheckForAppUpdate(true);
             }
-            catch
-            {
-                vCheckingForUpdate = false;
-                MessageBox.Show("Failed to check for the latest application version,\nplease check your internet connection and try again.", "Arnold Vink Tools");
-            }
+            catch { }
         }
 
         //Show the PC's detected ip adres
@@ -108,24 +106,22 @@ namespace ArnoldVinkTools
         }
 
         //Restart Arnold Vink Tools
-        private void btn_RestartTools_Click(object sender, RoutedEventArgs e)
+        private async void btn_RestartTools_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                TrayNotifyIcon.Visible = false;
-                Process.Start(Assembly.GetEntryAssembly().Location);
-                Environment.Exit(0);
+                await ProcessLauncherWin32Async("ArnoldVinkTools.exe", "", "", false, false);
+                await Application_Exit();
             }
             catch { }
         }
 
         //Exit Arnold Vink Tools
-        private void btn_ExitTools_Click(object sender, RoutedEventArgs e)
+        private async void btn_ExitTools_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                TrayNotifyIcon.Visible = false;
-                Environment.Exit(0);
+                await Application_Exit();
             }
             catch { }
         }

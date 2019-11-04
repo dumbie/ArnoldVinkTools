@@ -68,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\ArnoldVinkProcesses\ProcessWin32Functions.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkProcesses\ProcessWin32Functions.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\ArnoldVinkSockets\SocketClass.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketClass.cs</Link>
     </Compile>
@@ -98,6 +101,7 @@
     <Compile Include="AppImport.cs" />
     <Compile Include="AppLaunchCheck.cs" />
     <Compile Include="AppTasks.cs" />
+    <Compile Include="AppUpdate.cs" />
     <Compile Include="AppVariables.cs" />
     <Compile Include="KeyboardOutput.cs" />
     <Compile Include="MainCode.cs" />

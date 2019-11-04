@@ -59,11 +59,11 @@ namespace ArnoldVinkTools
                 }
 
                 //Check - If the updater failed to cleanup
-                if (File.Exists("App-Update.zip"))
+                if (File.Exists("AppUpdate.zip"))
                 {
                     try
                     {
-                        File.Delete("App-Update.zip");
+                        File.Delete("AppUpdate.zip");
                     }
                     catch { }
                 }

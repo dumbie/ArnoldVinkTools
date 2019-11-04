@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
+using static ArnoldVinkTools.AppVariables;
 
 namespace ArnoldVinkTools
 {
