@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -17,7 +17,7 @@ namespace ArnoldVinkTools
         static extern Int32 SystemParametersInfo(UInt32 uiAction, UInt32 uiParam, String pvParam, UInt32 fWinIni);
 
         //Start checking for TimeMe wallpaper
-        void StartCheckWallpaper()
+        async void StartCheckWallpaper()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace ArnoldVinkTools
                     string WallpaperLocationPng = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.png";
                     CheckAndSetWallpaper(WallpaperLocationPng);
 
-                    Thread.Sleep(600000);
+                    await Task.Delay(600000);
                 }
             }
             catch { }

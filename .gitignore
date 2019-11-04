@@ -1,6 +1,12 @@
 /ArnoldVinkTools/bin
 /ArnoldVinkTools/obj
+/ArnoldVinkTools-Admin/bin
+/ArnoldVinkTools-Admin/obj
+/Updater/bin
 /Updater/obj
+/packages
 *.user
+*.aps
 *.pfx
 *.vs
+

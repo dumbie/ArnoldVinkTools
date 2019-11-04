@@ -19,7 +19,7 @@ namespace ArnoldVinkTools
         public async Task MainStartup()
         {
             //Initialize application
-            StartupCheck();
+            await StartupCheck();
             TrayMenu();
 
             //Check application settings
@@ -33,15 +33,16 @@ namespace ArnoldVinkTools
             //Whitelist supported windows store apps
             WhitelistApps();
 
-            //Start receiving incoming sockets
-            await SocketServerSwitch(false, false);
+            //Enable the socket server
+            vSocketServer.vTcpListenerPort = 1000;
+            await vSocketServer.SocketServerSwitch(false, false);
+            vSocketServer.EventBytesReceived += ReceivedSocketHandler;
 
             //Start checking for TimeMe wallpaper
             if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
             {
-                Action TaskAction = () => { StartCheckWallpaper(); };
                 vCheckWallpaperToken = new CancellationTokenSource();
-                vCheckWallpaperTask = AVActions.TaskStart(TaskAction, vCheckWallpaperToken);
+                vCheckWallpaperTask = AVActions.TaskStart(StartCheckWallpaper, vCheckWallpaperToken);
             }
         }
 
@@ -55,10 +56,10 @@ namespace ArnoldVinkTools
                     vCheckingForUpdate = true;
 
                     //Download Current Version
-                    string ResCurrentVersion = await AVDownloader.DownloadStringAsync(5000, "Arnold Vink Tools", null, new Uri("http://version.arnoldvink.com/ArnoldVinkTools.zip-version.txt" + "?nc=" + Environment.TickCount));
+                    string ResCurrentVersion = await AVDownloader.DownloadStringAsync(5000, "Arnold Vink Tools", null, new Uri("http://download.arnoldvink.com/ArnoldVinkTools.zip-version.txt" + "?nc=" + Environment.TickCount));
                     if (ResCurrentVersion != Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0])
                     {
-                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: v" + ResCurrentVersion + ", Do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
+                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: v" + ResCurrentVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
                         if (Result == MessageBoxResult.Yes)
                         {
                             TrayNotifyIcon.Visible = false;
@@ -66,7 +67,10 @@ namespace ArnoldVinkTools
                             Environment.Exit(0);
                         }
                     }
-                    else { MessageBox.Show("No new update has been found.", "Arnold Vink Tools"); }
+                    else
+                    {
+                        MessageBox.Show("No new update has been found.", "Arnold Vink Tools");
+                    }
 
                     vCheckingForUpdate = false;
                 }

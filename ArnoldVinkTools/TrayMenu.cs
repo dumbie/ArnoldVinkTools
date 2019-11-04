@@ -25,7 +25,7 @@ namespace ArnoldVinkTools
 
                 // Initialize the tray notify icon. 
                 TrayNotifyIcon.Text = "Arnold Vink Tools";
-                TrayNotifyIcon.Icon = new Icon(Assembly.GetExecutingAssembly().GetManifestResourceStream("ArnoldVinkTools.Resources.ArnoldVinkTools.ico"));
+                TrayNotifyIcon.Icon = new Icon(Assembly.GetExecutingAssembly().GetManifestResourceStream("ArnoldVinkTools.Assets.AppIcon.ico"));
 
                 // Handle Double Click event
                 TrayNotifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);

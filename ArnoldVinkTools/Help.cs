@@ -12,10 +12,10 @@ namespace ArnoldVinkTools
             if (stackpanel_HelpText.Children.Count == 0)
             {
                 stackpanel_HelpText.Children.Add(new TextBlock() { Text = "Support and bug reporting", Style = (Style)App.Current.Resources["TextBlockBlack"] });
-                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "When you are walking into any problem or bug you can goto the support page here: http://help.arnoldvink.com", Style = (Style)App.Current.Resources["TextBlockLightGray"], TextWrapping = TextWrapping.Wrap });
+                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "When you are walking into any problems or a bug you can go to my help page at https://help.arnoldvink.com so I can try to help you out and get everything working.", Style = (Style)App.Current.Resources["TextBlockLightGray"], TextWrapping = TextWrapping.Wrap });
 
-                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "\r\nDevelopment donation support", Style = (Style)App.Current.Resources["TextBlockBlack"] });
-                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "Feel free to make a donation on: http://donation.arnoldvink.com", Style = (Style)App.Current.Resources["TextBlockLightGray"], TextWrapping = TextWrapping.Wrap });
+                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "\r\nDeveloper donation", Style = (Style)App.Current.Resources["TextBlockBlack"] });
+                stackpanel_HelpText.Children.Add(new TextBlock() { Text = "If you appreciate my project and want to support me with my projects you can make a donation through https://donation.arnoldvink.com", Style = (Style)App.Current.Resources["TextBlockLightGray"], TextWrapping = TextWrapping.Wrap });
 
                 //Set the version text
                 stackpanel_HelpText.Children.Add(new TextBlock() { Text = "\r\nApplication made by Arnold Vink", Style = (Style)App.Current.Resources["TextBlockBlack"] });

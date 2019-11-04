@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace ArnoldVinkTools
 {
     partial class MainPage
     {
-        void StartupCheck()
+        async Task StartupCheck()
         {
             try
             {
                 Debug.WriteLine("Checking current application status...");
 
                 //Check - If application is already running
-                Thread.Sleep(1000); //Restart fix
+                await Task.Delay(1000); //Restart fix
                 if (Process.GetProcessesByName("ArnoldVinkTools").Length > 1)
                 {
                     Debug.WriteLine("Application is already running, closing this process.");

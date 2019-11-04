@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using ArnoldVinkCode;
+using System.Configuration;
 using System.Windows;
 
 namespace ArnoldVinkTools
@@ -9,5 +10,8 @@ namespace ArnoldVinkTools
         Configuration vConfiguration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         long vWallpaperFilesize = 0;
         bool vCheckingForUpdate = false;
+
+        //Socket Variables
+        public static ArnoldVinkSocketServer vSocketServer = new ArnoldVinkSocketServer();
     }
 }

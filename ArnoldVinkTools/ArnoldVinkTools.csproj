@@ -38,7 +38,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\ArnoldVinkTools.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ArnoldVinkTools.App</StartupObject>
@@ -68,8 +68,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\ArnoldVinkSockets\SocketClass.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketClass.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\ArnoldVinkSockets\SocketServer.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketServer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\ArnoldVinkSockets\SocketServerVariables.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketServerVariables.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\AVActions.cs">
       <Link>Resources\ArnoldVinkCode\Functions\AVActions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\AVClassConverters.cs">
+      <Link>ArnoldVinkCode\Functions\AVClassConverters.cs</Link>
     </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Functions\Desktop\AVDownloader.cs">
       <Link>Resources\ArnoldVinkCode\Functions\AVDownloader.cs</Link>
@@ -84,16 +96,13 @@
     <Compile Include="MainCode.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Resources\Classes\Classes.cs" />
-    <Compile Include="ScreenCapture.cs" />
     <Compile Include="Help.cs" />
     <Compile Include="AppSettings.cs" />
-    <Compile Include="SocketHandle.cs" />
-    <Compile Include="SocketServer.cs" />
-    <Compile Include="SocketSend.cs" />
+    <Compile Include="SocketHandlers.cs" />
     <Compile Include="StartupCheck.cs" />
     <Compile Include="TrayMenu.cs" />
     <Compile Include="WhitelistApps.cs" />
-    <Page Include="MainStyles.xaml">
+    <Page Include="Styles\MainStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,14 +132,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ArnoldVinkTools.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\ArnoldVinkTools.jpg" />
-    <Content Include="Resources\Screens\BlankScreen.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Assets\AppIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

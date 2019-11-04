@@ -28,42 +28,6 @@ namespace ArnoldVinkTools
                     vConfiguration.AppSettings.Settings.Add("TimeMeWallpaper", "False");
                 }
 
-                //if (ConfigurationManager.AppSettings["StreamVRFakeSBS"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRFakeSBS");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRFakeSBS", "True");
-                //}
-
-                //if (ConfigurationManager.AppSettings["StreamVRShowMouse"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRShowMouse");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRShowMouse", "False");
-                //}
-
-                //if (ConfigurationManager.AppSettings["StreamVRHeadmount"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRHeadmount");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRHeadmount", "0");
-                //}
-
-                //if (ConfigurationManager.AppSettings["StreamVRLimitRes"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRLimitRes");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRLimitRes", "0");
-                //}
-
-                //if (ConfigurationManager.AppSettings["StreamVRMaxFps"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRMaxFps");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRMaxFps", "0");
-                //}
-
-                //if (ConfigurationManager.AppSettings["StreamVRMonitor"] == null)
-                //{
-                //    vConfiguration.AppSettings.Settings.Remove("StreamVRMonitor");
-                //    vConfiguration.AppSettings.Settings.Add("StreamVRMonitor", "0");
-                //}
-
                 vConfiguration.Save();
                 ConfigurationManager.RefreshSection("appSettings");
             }
@@ -97,7 +61,10 @@ namespace ArnoldVinkTools
                     catch { }
                 }
             }
-            catch (Exception Ex) { MessageBox.Show("SettingsLoadError: " + Ex.Message, "Arnold Vink Tools"); }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("SettingsLoadError: " + Ex.Message, "Arnold Vink Tools");
+            }
         }
 
         //Save - Application Settings
@@ -134,7 +101,7 @@ namespace ArnoldVinkTools
                     ConfigurationManager.RefreshSection("appSettings");
 
                     //Restart the socket server
-                    await SocketServerSwitch(false, true);
+                    await vSocketServer.SocketServerSwitch(false, true);
                 };
 
                 //Save - TimeMe Wallpaper
@@ -158,7 +125,10 @@ namespace ArnoldVinkTools
                     catch { }
                 };
             }
-            catch (Exception Ex) { MessageBox.Show("SettingsSaveError: " + Ex.Message, "Arnold Vink Tools"); }
+            catch (Exception Ex)
+            {
+                MessageBox.Show("SettingsSaveError: " + Ex.Message, "Arnold Vink Tools");
+            }
         }
     }
 }
