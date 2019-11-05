@@ -10,7 +10,7 @@ namespace ArnoldVinkTools
         //Application startup
         protected override async void OnStartup(StartupEventArgs e)
         {
-            await vMainPage.Startup();
+            await vMainPage.Application_Startup();
         }
     }
 }

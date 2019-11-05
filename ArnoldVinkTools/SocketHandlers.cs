@@ -1,6 +1,7 @@
 ﻿using ArnoldVinkCode;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace ArnoldVinkTools
             {
                 //Receive message
                 string StringReceived = Encoding.UTF8.GetString(receivedBytes, 0, receivedBytes.Length);
+                StringReceived = WebUtility.UrlDecode(StringReceived);
+                StringReceived = WebUtility.HtmlDecode(StringReceived);
                 Debug.WriteLine("Received string: " + StringReceived);
 
                 //Prepare response message
@@ -59,13 +62,10 @@ namespace ArnoldVinkTools
                 else
                 {
                     await KeyCommand(socketStringArray[0]);
-                    return "Ok";
                 }
             }
-            catch
-            {
-                return string.Empty;
-            }
+            catch { }
+            return "Ok";
         }
     }
 }

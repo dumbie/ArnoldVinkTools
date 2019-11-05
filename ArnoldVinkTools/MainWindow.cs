@@ -16,8 +16,8 @@ namespace ArnoldVinkTools
 {
     partial class MainPage
     {
-        //Window Startup
-        public async Task Startup()
+        //Application Startup
+        public async Task Application_Startup()
         {
             try
             {
@@ -37,8 +37,8 @@ namespace ArnoldVinkTools
                 WhitelistApps();
 
                 //Enable the socket server
-                vSocketServer.vTcpListenerPort = 1000;
-                await vSocketServer.SocketServerSwitch(false, false);
+                vSocketServer.vTcpListenerPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+                vSocketServer.SocketServerEnable();
                 vSocketServer.EventBytesReceived += ReceivedSocketHandler;
 
                 //Start checking for TimeMe wallpaper
@@ -48,24 +48,31 @@ namespace ArnoldVinkTools
                     vCheckWallpaperTask = AVActions.TaskStart(StartCheckWallpaper, vCheckWallpaperToken);
                 }
 
-                ////Check for available application update
-                //if (DateTime.Now.Subtract(DateTime.Parse(ConfigurationManager.AppSettings["AppUpdateCheck"], vAppCultureInfo)).Days >= 5)
-                //{
-                //    await AppUpdate.CheckForAppUpdate(true);
-                //}
+                //Check for available application update
+                if (DateTime.Now.Subtract(DateTime.Parse(ConfigurationManager.AppSettings["AppUpdateCheck"], vAppCultureInfo)).Days >= 5)
+                {
+                    await AppUpdate.CheckForAppUpdate(true);
+                }
+
                 Debug.WriteLine("Application has launched.");
             }
             catch { }
         }
 
-        //Close the application
+        //Application Exit
         public async Task Application_Exit()
         {
             try
             {
+                Debug.WriteLine("Exiting application.");
+
+                //Disable the socket server
                 await vSocketServer.SocketServerDisable();
 
+                //Hide the tray icon
                 TrayNotifyIcon.Visible = false;
+
+                //Exit the application
                 Environment.Exit(0);
             }
             catch { }

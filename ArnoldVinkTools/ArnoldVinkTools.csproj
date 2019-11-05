@@ -104,7 +104,7 @@
     <Compile Include="AppUpdate.cs" />
     <Compile Include="AppVariables.cs" />
     <Compile Include="KeyboardOutput.cs" />
-    <Compile Include="MainCode.cs" />
+    <Compile Include="MainWindow.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Resources\Classes\VirtualKeys.cs" />
     <Compile Include="HelpFunctions.cs" />
@@ -153,6 +153,9 @@
     <EmbeddedResource Include="Assets\AppIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)SignToolExe.exe</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

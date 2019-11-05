@@ -22,6 +22,13 @@ namespace ArnoldVinkTools
                     vConfiguration.AppSettings.Settings.Add("ServerPort", "1000");
                 }
 
+                //Check - Last update check
+                if (ConfigurationManager.AppSettings["AppUpdateCheck"] == null)
+                {
+                    vConfiguration.AppSettings.Settings.Remove("AppUpdateCheck");
+                    vConfiguration.AppSettings.Settings.Add("AppUpdateCheck", DateTime.Now.ToString(vAppCultureInfo));
+                }
+
                 //Check - TimeMe Wallpaper
                 if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == null)
                 {
@@ -102,7 +109,8 @@ namespace ArnoldVinkTools
                     ConfigurationManager.RefreshSection("appSettings");
 
                     //Restart the socket server
-                    await vSocketServer.SocketServerSwitch(false, true);
+                    vSocketServer.vTcpListenerPort = Convert.ToInt32(txt_ServerPort.Text);
+                    await vSocketServer.SocketServerRestart();
                 };
 
                 //Save - TimeMe Wallpaper
