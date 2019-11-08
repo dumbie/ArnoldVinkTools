@@ -1,7 +1,8 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using static ArnoldVinkTools.AppVariables;
@@ -53,21 +54,10 @@ namespace ArnoldVinkTools
                 //Load - TimeMe Wallpaper
                 cb_TimeMeWallpaper.IsChecked = Convert.ToBoolean(ConfigurationManager.AppSettings["TimeMeWallpaper"]);
 
-                //Load - Application Windows Startup
-                RegistryKey StartupRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                foreach (string StartupApp in StartupRegistryKey.GetValueNames())
-                {
-                    try
-                    {
-                        if (StartupApp == "Arnold Vink Tools")
-                        {
-                            cb_StartupWindows.IsChecked = true;
-                            //Update to the current application directory
-                            StartupRegistryKey.SetValue("Arnold Vink Tools", "\"" + Directory.GetCurrentDirectory() + "\"");
-                        }
-                    }
-                    catch { }
-                }
+                //Check if application is set to launch on Windows startup
+                string TargetName_Normal = Assembly.GetEntryAssembly().GetName().Name;
+                string TargetFileStartup_Normal = Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\" + TargetName_Normal + ".url";
+                if (File.Exists(TargetFileStartup_Normal)) { cb_StartupWindows.IsChecked = true; }
             }
             catch (Exception Ex)
             {
@@ -83,7 +73,7 @@ namespace ArnoldVinkTools
                 //Save - Server Port
                 txt_ServerPort.TextChanged += async (sender, e) =>
                 {
-                    if (String.IsNullOrWhiteSpace(txt_ServerPort.Text)) { return; }
+                    if (string.IsNullOrWhiteSpace(txt_ServerPort.Text)) { return; }
 
                     if (Regex.IsMatch(txt_ServerPort.Text, "(\\D+)"))
                     {
@@ -122,21 +112,50 @@ namespace ArnoldVinkTools
                     ConfigurationManager.RefreshSection("appSettings");
                 };
 
-                //Save - Application Windows Startup
-                cb_StartupWindows.Click += (sender, e) =>
-                {
-                    try
-                    {
-                        RegistryKey StartupRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                        if (cb_StartupWindows.IsChecked == true) { StartupRegistryKey.SetValue("Arnold Vink Tools", "\"" + Directory.GetCurrentDirectory() + "\""); }
-                        else { StartupRegistryKey.DeleteValue("Arnold Vink Tools", false); }
-                    }
-                    catch { }
-                };
+                //Save - Windows Startup
+                cb_StartupWindows.Click += (sender, e) => { ManageShortcutStartup(); };
             }
             catch (Exception Ex)
             {
                 MessageBox.Show("SettingsSaveError: " + Ex.Message, "Arnold Vink Tools");
+            }
+        }
+
+        //Create startup shortcut
+        void ManageShortcutStartup()
+        {
+            try
+            {
+                //Set application shortcut paths
+                string TargetFilePath = Assembly.GetEntryAssembly().CodeBase.Replace(".exe", "-Admin.exe");
+                string TargetName = Assembly.GetEntryAssembly().GetName().Name;
+                string TargetFileShortcut = Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\" + TargetName + ".url";
+
+                //Check if the shortcut already exists
+                if (!File.Exists(TargetFileShortcut))
+                {
+                    Debug.WriteLine("Adding application to Windows startup.");
+                    using (StreamWriter StreamWriter = new StreamWriter(TargetFileShortcut))
+                    {
+                        StreamWriter.WriteLine("[InternetShortcut]");
+                        StreamWriter.WriteLine("URL=" + TargetFilePath);
+                        StreamWriter.WriteLine("IconFile=" + TargetFilePath.Replace("file:///", ""));
+                        StreamWriter.WriteLine("IconIndex=0");
+                        StreamWriter.Flush();
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("Removing application from Windows startup.");
+                    if (File.Exists(TargetFileShortcut))
+                    {
+                        File.Delete(TargetFileShortcut);
+                    }
+                }
+            }
+            catch
+            {
+                Debug.WriteLine("Failed creating startup shortcut.");
             }
         }
     }

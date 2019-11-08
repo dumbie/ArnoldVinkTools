@@ -21,7 +21,7 @@ namespace ArnoldVinkTools
 
                     //Download Current Version
                     string ResCurrentVersion = await AVDownloader.DownloadStringAsync(5000, "Arnold Vink Tools", null, new Uri("http://download.arnoldvink.com/ArnoldVinkTools.zip-version.txt" + "?nc=" + Environment.TickCount));
-                    if (!string.IsNullOrWhiteSpace(ResCurrentVersion) && ResCurrentVersion != Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0])
+                    if (!string.IsNullOrWhiteSpace(ResCurrentVersion) && ResCurrentVersion != Assembly.GetEntryAssembly().FullName.Split('=')[1].Split(',')[0])
                     {
                         MessageBoxResult Result = MessageBox.Show("A newer version has been found: v" + ResCurrentVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
                         if (Result == MessageBoxResult.Yes)

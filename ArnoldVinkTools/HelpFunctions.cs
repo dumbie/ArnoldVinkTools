@@ -21,7 +21,7 @@ namespace ArnoldVinkTools
 
                     //Set the version text
                     stackpanel_HelpText.Children.Add(new TextBlock() { Text = "\r\nApplication made by Arnold Vink", Style = (Style)App.Current.Resources["TextBlockBlack"], FontSize = (double)App.Current.Resources["TextSizeMedium"] });
-                    stackpanel_HelpText.Children.Add(new TextBlock() { Text = "Version: v" + Assembly.GetExecutingAssembly().FullName.Split('=')[1].Split(',')[0], Style = (Style)App.Current.Resources["TextBlockGray"], TextWrapping = TextWrapping.Wrap });
+                    stackpanel_HelpText.Children.Add(new TextBlock() { Text = "Version: v" + Assembly.GetEntryAssembly().FullName.Split('=')[1].Split(',')[0], Style = (Style)App.Current.Resources["TextBlockGray"], TextWrapping = TextWrapping.Wrap });
                 }
             }
             catch { }

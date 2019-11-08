@@ -23,7 +23,9 @@ namespace ArnoldVinkTools
             {
                 //Initialize application
                 Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
-                TrayMenu();
+
+                //Create the tray menu
+                Application_CreateTrayMenu();
 
                 //Check application settings
                 Settings_Check();
@@ -37,9 +39,7 @@ namespace ArnoldVinkTools
                 WhitelistApps();
 
                 //Enable the socket server
-                vSocketServer.vTcpListenerPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
-                vSocketServer.SocketServerEnable();
-                vSocketServer.EventBytesReceived += ReceivedSocketHandler;
+                EnableSocketServer();
 
                 //Start checking for TimeMe wallpaper
                 if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
@@ -55,6 +55,19 @@ namespace ArnoldVinkTools
                 }
 
                 Debug.WriteLine("Application has launched.");
+            }
+            catch { }
+        }
+
+        //Enable the socket server
+        private void EnableSocketServer()
+        {
+            try
+            {
+                int SocketServerPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
+
+                vSocketServer = new ArnoldVinkSocketServer("127.0.0.1", SocketServerPort);
+                vSocketServer.EventBytesReceived += ReceivedSocketHandler;
             }
             catch { }
         }

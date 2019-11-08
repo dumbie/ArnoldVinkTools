@@ -12,11 +12,11 @@ namespace ArnoldVinkTools
         public static NotifyIcon TrayNotifyIcon = new NotifyIcon();
         public static ContextMenu TrayContextMenu = new ContextMenu();
 
-        void TrayMenu()
+        void Application_CreateTrayMenu()
         {
             try
             {
-                Debug.WriteLine("Creating application tray menu...");
+                Debug.WriteLine("Creating application tray menu.");
 
                 // Create a context menu for systray.  
                 TrayContextMenu.MenuItems.Add("Settings", OnSettings);
@@ -25,7 +25,7 @@ namespace ArnoldVinkTools
 
                 // Initialize the tray notify icon. 
                 TrayNotifyIcon.Text = "Arnold Vink Tools";
-                TrayNotifyIcon.Icon = new Icon(Assembly.GetExecutingAssembly().GetManifestResourceStream("ArnoldVinkTools.Assets.AppIcon.ico"));
+                TrayNotifyIcon.Icon = new Icon(Assembly.GetEntryAssembly().GetManifestResourceStream("ArnoldVinkTools.Assets.AppIcon.ico"));
 
                 // Handle Double Click event
                 TrayNotifyIcon.DoubleClick += new EventHandler(NotifyIcon_DoubleClick);
