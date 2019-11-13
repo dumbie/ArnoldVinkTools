@@ -66,8 +66,8 @@ namespace ArnoldVinkTools
             {
                 int SocketServerPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
 
-                vSocketServer = new ArnoldVinkSocketServer("127.0.0.1", SocketServerPort);
-                vSocketServer.EventBytesReceived += ReceivedSocketHandler;
+                vArnoldVinkSockets = new ArnoldVinkSockets("127.0.0.1", SocketServerPort);
+                vArnoldVinkSockets.EventBytesReceived += ReceivedSocketHandler;
             }
             catch { }
         }
@@ -80,7 +80,7 @@ namespace ArnoldVinkTools
                 Debug.WriteLine("Exiting application.");
 
                 //Disable the socket server
-                await vSocketServer.SocketServerDisable();
+                await vArnoldVinkSockets.SocketServerDisable();
 
                 //Hide the tray icon
                 TrayNotifyIcon.Visible = false;

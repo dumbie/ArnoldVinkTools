@@ -99,8 +99,8 @@ namespace ArnoldVinkTools
                     ConfigurationManager.RefreshSection("appSettings");
 
                     //Restart the socket server
-                    vSocketServer.vTcpListenerPort = Convert.ToInt32(txt_ServerPort.Text);
-                    await vSocketServer.SocketServerRestart();
+                    vArnoldVinkSockets.vTcpListenerPort = Convert.ToInt32(txt_ServerPort.Text);
+                    await vArnoldVinkSockets.SocketServerRestart();
                 };
 
                 //Save - TimeMe Wallpaper

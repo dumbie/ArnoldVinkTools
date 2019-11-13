@@ -14,7 +14,7 @@ namespace ArnoldVinkTools
         //Update Variables
         public static bool vCheckingForUpdate = false;
 
-        //Socket Variables
-        public static ArnoldVinkSocketServer vSocketServer = null;
+        //Sockets Variables
+        public static ArnoldVinkSockets vArnoldVinkSockets = null;
     }
 }
