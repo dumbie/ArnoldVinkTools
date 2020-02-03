@@ -34,7 +34,7 @@ namespace ArnoldVinkTools
                     {
                         if (!Silent)
                         {
-                            MessageBox.Show("No new update has been found.", "Arnold Vink Tools");
+                            MessageBox.Show("No new application update has been found.", "Arnold Vink Tools");
                         }
                     }
 
