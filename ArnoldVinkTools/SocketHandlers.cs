@@ -37,11 +37,12 @@ namespace ArnoldVinkTools
                 string StringReceived = Encoding.UTF8.GetString(receivedBytes, 0, receivedBytes.Length);
                 StringReceived = WebUtility.UrlDecode(StringReceived);
                 StringReceived = WebUtility.HtmlDecode(StringReceived);
+                StringReceived = StringReceived.TrimEnd('\0');
                 Debug.WriteLine("Received string: " + StringReceived);
 
                 //Prepare response message
                 string[] SocketData = StringReceived.Split('‡');
-                string StringResponse = await SocketStringHandle(SocketData);
+                string StringResponse = SocketStringHandle(SocketData);
                 byte[] bytesResponse = Encoding.UTF8.GetBytes(StringResponse);
 
                 //Return response message
@@ -51,7 +52,7 @@ namespace ArnoldVinkTools
         }
 
         //Handle received socket string
-        public async Task<string> SocketStringHandle(string[] socketStringArray)
+        public string SocketStringHandle(string[] socketStringArray)
         {
             try
             {
@@ -59,9 +60,13 @@ namespace ArnoldVinkTools
                 {
                     return Convert.ToString((System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifePercent * 100) + "/" + System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifeRemaining + "/" + System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus);
                 }
+                else if (socketStringArray[0].StartsWith("SwitchMonitor"))
+                {
+                    CommandSwitchMonitor(socketStringArray[1]);
+                }
                 else
                 {
-                    await KeyCommand(socketStringArray[0]);
+                    CommandKey(socketStringArray[0]);
                 }
             }
             catch { }

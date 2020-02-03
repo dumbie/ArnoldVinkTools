@@ -2,10 +2,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using static AppImport.AppImport;
 using static ArnoldVinkCode.AVActions;
 using static ArnoldVinkTools.AppVariables;
 
@@ -13,10 +13,6 @@ namespace ArnoldVinkTools
 {
     partial class MainPage
     {
-        //Application Dll Imports
-        [DllImport("User32.dll")]
-        static extern Int32 SystemParametersInfo(UInt32 uiAction, UInt32 uiParam, String pvParam, UInt32 fWinIni);
-
         //Start checking for TimeMe wallpaper
         async void StartCheckWallpaper()
         {

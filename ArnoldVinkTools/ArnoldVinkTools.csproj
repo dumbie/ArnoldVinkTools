@@ -119,6 +119,15 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVClassConverters.cs">
       <Link>ArnoldVinkCode\Functions\AVClassConverters.cs</Link>
     </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs">
+      <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\Classes\DisplayMonitorSummary.cs">
+      <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\Classes\DisplayMonitorSummary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\InteropDll.cs">
+      <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\InteropDll.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDownloader.cs">
       <Link>ArnoldVinkCode\Functions\AVDownloader.cs</Link>
     </Compile>
@@ -140,7 +149,7 @@
     <Compile Include="AppTasks.cs" />
     <Compile Include="AppUpdate.cs" />
     <Compile Include="AppVariables.cs" />
-    <Compile Include="KeyboardOutput.cs" />
+    <Compile Include="CommandSwitchMonitor.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Resources\Classes\VirtualKeys.cs" />
@@ -173,7 +182,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CheckWallpaper.cs" />
-    <Compile Include="KeyCommand.cs" />
+    <Compile Include="CommandKey.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

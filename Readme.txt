@@ -8,6 +8,11 @@ client and it will send the current battery level to the Windows TimeMe client.
 3) Set your Arnold Vink Tools PC ip in the used client application settings tab*
 * Only required if you are connecting from an external device on your network.
 
+| Uninstallation Instructions
+1) Remove the created shortcuts from your startup folder.
+2) Remove the created tasks in Windows task scheduler.
+3) Remove the extracted Arnold Vink Tools directory.
+
 | Tips and tricks
 - Let the Arnold Vink Tools automatically launch on Windows startup for easier usage.
 - Some users might need to run the application as administrator to work properly.*
@@ -20,11 +25,11 @@ tab and enable "Run this program as an administrator" and click on "Apply" and "
 - Your device on the same wired or wireless network as where Arnold Vink Tools is running from.
 - .NET Framework 4.5 - Download: http://microsoft.com/en-us/download/confirmation.aspx?id=40779
 
-| Donation
-Feel free to make a donation on: http://donation.arnoldvink.com
+| Support and bug reporting
+When you are walking into any problems or a bug you can go to my help page at https://help.arnoldvink.com so I can try to help you out and get everything working.
 
-| Support and bug report
-When you are walking into any problem or bug you can goto the support page here: http://help.arnoldvink.com
+| Developer donation
+If you appreciate my project and want to support me with my projects you can make a donation through https://donation.arnoldvink.com
 
 | Changelog
 v1.6.0.0 (19-October-2018)
