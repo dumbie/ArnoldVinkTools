@@ -59,6 +59,10 @@ namespace Updater
                     AppRunning = true;
                     CloseProcess.Kill();
                 }
+                foreach (Process CloseProcess in Process.GetProcessesByName("ArnoldVinkTools-Admin"))
+                {
+                    CloseProcess.Kill();
+                }
 
                 //Wait for applications to have closed
                 await Task.Delay(1000);
