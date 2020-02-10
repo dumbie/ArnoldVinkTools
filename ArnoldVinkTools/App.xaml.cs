@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
+using static ArnoldVinkCode.AVFirewall;
 
 namespace ArnoldVinkTools
 {
@@ -10,7 +12,15 @@ namespace ArnoldVinkTools
         //Application startup
         protected override async void OnStartup(StartupEventArgs e)
         {
-            await vMainPage.Application_Startup();
+            try
+            {
+                //Allow application in firewall
+                string appFilePath = Assembly.GetEntryAssembly().Location;
+                Firewall_ExecutableAllow("Arnold Vink Tools", appFilePath, true);
+
+                await vMainPage.Application_Startup();
+            }
+            catch { }
         }
     }
 }
