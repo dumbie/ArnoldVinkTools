@@ -46,7 +46,7 @@ namespace ArnoldVinkTools
                 byte[] bytesResponse = Encoding.UTF8.GetBytes(StringResponse);
 
                 //Return response message
-                await vArnoldVinkSockets.TcpClientSendBytes(tcpClient, bytesResponse, vArnoldVinkSockets.vTcpClientTimeout, true);
+                await vArnoldVinkSockets.TcpClientSendBytes(tcpClient, bytesResponse, vArnoldVinkSockets.vTcpClientTimeout, false);
             }
             catch { }
         }
