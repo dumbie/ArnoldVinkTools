@@ -21,9 +21,6 @@ namespace ArnoldVinkTools
         {
             try
             {
-                //Restart wait fix
-                await Task.Delay(2000);
-
                 //Initialize application
                 Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
 

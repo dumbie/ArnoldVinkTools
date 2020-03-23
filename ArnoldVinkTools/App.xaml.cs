@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using static ArnoldVinkCode.AVFirewall;
 
@@ -14,6 +15,9 @@ namespace ArnoldVinkTools
         {
             try
             {
+                //Restart wait fix
+                await Task.Delay(2000);
+
                 //Allow application in firewall
                 string appFilePath = Assembly.GetEntryAssembly().Location;
                 Firewall_ExecutableAllow("Arnold Vink Tools", appFilePath, true);
