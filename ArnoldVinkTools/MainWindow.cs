@@ -80,7 +80,10 @@ namespace ArnoldVinkTools
                 Debug.WriteLine("Exiting application.");
 
                 //Disable the socket server
-                await vArnoldVinkSockets.SocketServerDisable();
+                if (vArnoldVinkSockets != null)
+                {
+                    await vArnoldVinkSockets.SocketServerDisable();
+                }
 
                 //Hide the tray icon
                 TrayNotifyIcon.Visible = false;
