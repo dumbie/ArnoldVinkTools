@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using static ArnoldVinkCode.AVFirewall;
@@ -16,7 +17,10 @@ namespace ArnoldVinkTools
             try
             {
                 //Restart wait fix
-                await Task.Delay(2000);
+                if (e.Args != null && e.Args.Contains("-restart"))
+                {
+                    await Task.Delay(2000);
+                }
 
                 //Allow application in firewall
                 string appFilePath = Assembly.GetEntryAssembly().Location;

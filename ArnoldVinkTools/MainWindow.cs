@@ -133,7 +133,7 @@ namespace ArnoldVinkTools
         {
             try
             {
-                await ProcessLauncherWin32Async("ArnoldVinkTools.exe", "", "", false, false);
+                await ProcessLauncherWin32Async("ArnoldVinkTools.exe", "", "-restart", false, false);
                 await Application_Exit();
             }
             catch { }
