@@ -105,6 +105,9 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkSockets\SocketClass.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketClass.cs</Link>
     </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkSockets\SocketClean.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketClean.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkSockets\SocketClient.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketClient.cs</Link>
     </Compile>
@@ -123,8 +126,8 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs">
       <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs</Link>
     </Compile>
-    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\Classes\DisplayMonitorSummary.cs">
-      <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\Classes\DisplayMonitorSummary.cs</Link>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\Classes\DisplayMonitorSwitch.cs">
+      <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\Classes\DisplayMonitorSwitch.cs</Link>
     </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\Interop\InteropSwitch.cs">
       <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\Interop\InteropSwitch.cs</Link>
