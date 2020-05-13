@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using ArnoldVinkCode;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using static AppImport.AppImport;
@@ -13,14 +13,15 @@ namespace ArnoldVinkTools
 {
     partial class MainPage
     {
-        //Start checking for TimeMe wallpaper
-        async void StartCheckWallpaper()
+        //Loop check for TimeMe wallpaper
+        async void LoopCheckWallpaper()
         {
             try
             {
-                Debug.WriteLine("Checking for TimeMe wallpaper...");
-                while (TaskRunningCheck(vCheckWallpaperToken))
+                while (vTask_Wallpaper.Status == AVTaskStatus.Running)
                 {
+                    Debug.WriteLine("Checking for TimeMe wallpaper...");
+
                     //Check for current jpg wallpaper file
                     string WallpaperLocationJpg = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.jpg";
                     CheckAndSetWallpaper(WallpaperLocationJpg);
@@ -29,10 +30,15 @@ namespace ArnoldVinkTools
                     string WallpaperLocationPng = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.png";
                     CheckAndSetWallpaper(WallpaperLocationPng);
 
-                    await Task.Delay(600000);
+                    //Delay the loop task
+                    await TaskDelayLoop(600000, vTask_Wallpaper);
                 }
             }
             catch { }
+            finally
+            {
+                vTask_Wallpaper.Status = AVTaskStatus.Stopped;
+            }
         }
 
         private void CheckAndSetWallpaper(string WallpaperLocation)
@@ -55,7 +61,7 @@ namespace ArnoldVinkTools
                         SystemParametersInfo(20, 0, WallpaperLocation, 0x1);
 
                         //Update TimeMe Preview
-                        Dispatcher.Invoke(delegate ()
+                        AVActions.ActionDispatcherInvoke(delegate
                         {
                             sp_TimeMeWallpaper.Visibility = Visibility.Visible;
 
@@ -70,7 +76,10 @@ namespace ArnoldVinkTools
                     }
                     else
                     {
-                        Dispatcher.Invoke(delegate () { sp_TimeMeWallpaper.Visibility = Visibility.Collapsed; });
+                        AVActions.ActionDispatcherInvoke(delegate
+                        {
+                            sp_TimeMeWallpaper.Visibility = Visibility.Collapsed;
+                        });
                     }
                 }
             }

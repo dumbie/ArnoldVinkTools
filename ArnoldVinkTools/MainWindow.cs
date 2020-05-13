@@ -44,8 +44,7 @@ namespace ArnoldVinkTools
                 //Start checking for TimeMe wallpaper
                 if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
                 {
-                    vCheckWallpaperToken = new CancellationTokenSource();
-                    vCheckWallpaperTask = AVActions.TaskStart(StartCheckWallpaper, vCheckWallpaperToken);
+                    AVActions.TaskStartLoop(LoopCheckWallpaper, vTask_Wallpaper);
                 }
 
                 //Check for available application update
@@ -78,6 +77,9 @@ namespace ArnoldVinkTools
             try
             {
                 Debug.WriteLine("Exiting application.");
+
+                //Disable the loop tasks
+                await AVActions.TaskStopLoop(vTask_Wallpaper);
 
                 //Disable the socket server
                 if (vArnoldVinkSockets != null)

@@ -72,6 +72,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkActions\AVActions.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkActions\AVActions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkActions\Classes\AVTaskDetails.cs">
+      <Link>ArnoldVinkCode\Functions\ArnoldVinkActions\Classes\AVTaskDetails.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkInputOutput\InputOutputClass.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkInputOutput\InputOutputClass.cs</Link>
     </Compile>
@@ -117,12 +123,6 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkSockets\SocketVariables.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkSockets\SocketVariables.cs</Link>
     </Compile>
-    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVActions.cs">
-      <Link>ArnoldVinkCode\Functions\AVActions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVClassConverters.cs">
-      <Link>ArnoldVinkCode\Functions\AVClassConverters.cs</Link>
-    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs">
       <Link>ArnoldVinkCode\Functions\AVDisplayMonitor\AVDisplayMonitorSwitch.cs</Link>
     </Compile>
@@ -159,7 +159,6 @@
     <Compile Include="CommandSwitchMonitor.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
-    <Compile Include="Resources\Classes\VirtualKeys.cs" />
     <Compile Include="HelpFunctions.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="SocketHandlers.cs" />
