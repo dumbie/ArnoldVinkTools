@@ -7,8 +7,10 @@ namespace ArnoldVinkTools
     partial class AppVariables
     {
         //Application Variables
-        public static Configuration vConfiguration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public static Configuration vConfigurationApplication = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static CultureInfo vAppCultureInfo = CultureInfo.InvariantCulture;
+
+        //Wallpaper Variables
         public static long vWallpaperFilesize = 0;
 
         //Update Variables

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArnoldVinkCode;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -19,26 +20,20 @@ namespace ArnoldVinkTools
                 //Check - Server Port
                 if (ConfigurationManager.AppSettings["ServerPort"] == null)
                 {
-                    vConfiguration.AppSettings.Settings.Remove("ServerPort");
-                    vConfiguration.AppSettings.Settings.Add("ServerPort", "1000");
+                    SettingSave("ServerPort", "1000");
                 }
 
                 //Check - Last update check
                 if (ConfigurationManager.AppSettings["AppUpdateCheck"] == null)
                 {
-                    vConfiguration.AppSettings.Settings.Remove("AppUpdateCheck");
-                    vConfiguration.AppSettings.Settings.Add("AppUpdateCheck", DateTime.Now.ToString(vAppCultureInfo));
+                    SettingSave("AppUpdateCheck", DateTime.Now.ToString(vAppCultureInfo));
                 }
 
                 //Check - TimeMe Wallpaper
                 if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == null)
                 {
-                    vConfiguration.AppSettings.Settings.Remove("TimeMeWallpaper");
-                    vConfiguration.AppSettings.Settings.Add("TimeMeWallpaper", "False");
+                    SettingSave("TimeMeWallpaper", "False");
                 }
-
-                vConfiguration.Save();
-                ConfigurationManager.RefreshSection("appSettings");
             }
             catch { }
         }
@@ -93,10 +88,7 @@ namespace ArnoldVinkTools
                         return;
                     }
 
-                    vConfiguration.AppSettings.Settings.Remove("ServerPort");
-                    vConfiguration.AppSettings.Settings.Add("ServerPort", txt_ServerPort.Text);
-                    vConfiguration.Save();
-                    ConfigurationManager.RefreshSection("appSettings");
+                    SettingSave("ServerPort", txt_ServerPort.Text);
 
                     //Restart the socket server
                     vArnoldVinkSockets.vTcpListenerPort = Convert.ToInt32(txt_ServerPort.Text);
@@ -104,12 +96,17 @@ namespace ArnoldVinkTools
                 };
 
                 //Save - TimeMe Wallpaper
-                cb_TimeMeWallpaper.Click += (sender, e) =>
+                cb_TimeMeWallpaper.Click += async (sender, e) =>
                 {
-                    vConfiguration.AppSettings.Settings.Remove("TimeMeWallpaper");
-                    vConfiguration.AppSettings.Settings.Add("TimeMeWallpaper", cb_TimeMeWallpaper.IsChecked.ToString());
-                    vConfiguration.Save();
-                    ConfigurationManager.RefreshSection("appSettings");
+                    SettingSave("TimeMeWallpaper", cb_TimeMeWallpaper.IsChecked.ToString());
+                    if ((bool)cb_TimeMeWallpaper.IsChecked)
+                    {
+                        TaskStart_TimeMeWallpaper();
+                    }
+                    else
+                    {
+                        await AVActions.TaskStopLoop(vTask_Wallpaper);
+                    }
                 };
 
                 //Save - Windows Startup
@@ -119,6 +116,19 @@ namespace ArnoldVinkTools
             {
                 MessageBox.Show("SettingsSaveError: " + Ex.Message, "Arnold Vink Tools");
             }
+        }
+
+        //Save - Application Setting
+        void SettingSave(string name, string value)
+        {
+            try
+            {
+                vConfigurationApplication.AppSettings.Settings.Remove(name);
+                vConfigurationApplication.AppSettings.Settings.Add(name, value);
+                vConfigurationApplication.Save();
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+            catch { }
         }
 
         //Create startup shortcut

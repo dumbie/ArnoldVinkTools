@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using static ArnoldVinkCode.ProcessWin32Functions;
@@ -41,11 +40,8 @@ namespace ArnoldVinkTools
                 //Enable the socket server
                 EnableSocketServer();
 
-                //Start checking for TimeMe wallpaper
-                if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == "True")
-                {
-                    AVActions.TaskStartLoop(LoopCheckWallpaper, vTask_Wallpaper);
-                }
+                //Start the background tasks
+                TasksBackgroundStart();
 
                 //Check for available application update
                 if (DateTime.Now.Subtract(DateTime.Parse(ConfigurationManager.AppSettings["AppUpdateCheck"], vAppCultureInfo)).Days >= 5)
@@ -78,8 +74,8 @@ namespace ArnoldVinkTools
             {
                 Debug.WriteLine("Exiting application.");
 
-                //Disable the loop tasks
-                await AVActions.TaskStopLoop(vTask_Wallpaper);
+                //Stop the background tasks
+                await TasksBackgroundStop();
 
                 //Disable the socket server
                 if (vArnoldVinkSockets != null)
