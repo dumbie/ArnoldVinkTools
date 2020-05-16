@@ -105,6 +105,13 @@ namespace ArnoldVinkTools
                     }
                     else
                     {
+                        //Reset wallpaper variables
+                        vWallpaperFilesize = 0;
+
+                        //Hide wallpaper preview
+                        sp_TimeMeWallpaper.Visibility = Visibility.Collapsed;
+
+                        //Stop the task loop
                         await AVActions.TaskStopLoop(vTask_Wallpaper);
                     }
                 };

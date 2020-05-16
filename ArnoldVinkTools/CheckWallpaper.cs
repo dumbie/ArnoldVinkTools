@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using static AppImport.AppImport;
@@ -14,52 +15,53 @@ namespace ArnoldVinkTools
     partial class MainPage
     {
         //Loop check for TimeMe wallpaper
-        async void LoopCheckWallpaper()
+        Task LoopCheckWallpaper()
         {
             try
             {
-                while (vTask_Wallpaper.Status == AVTaskStatus.Running)
+                while (!vTask_Wallpaper.TaskStopRequest)
                 {
-                    Debug.WriteLine("Checking for TimeMe wallpaper...");
-
-                    //Check for current jpg wallpaper file
-                    string WallpaperLocationJpg = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.jpg";
-                    bool WallpaperLocationJpgExists = File.Exists(WallpaperLocationJpg);
-                    if (WallpaperLocationJpgExists)
+                    try
                     {
-                        CheckAndSetWallpaper(WallpaperLocationJpg);
-                    }
+                        Debug.WriteLine("Checking for TimeMe wallpaper...");
 
-                    //Check for current png wallpaper file
-                    string WallpaperLocationPng = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.png";
-                    bool WallpaperLocationPngExists = File.Exists(WallpaperLocationPng);
-                    if (WallpaperLocationPngExists)
-                    {
-                        CheckAndSetWallpaper(WallpaperLocationPng);
-                    }
-
-                    //Check if the wallpaper exists
-                    if (!WallpaperLocationJpgExists && !WallpaperLocationPngExists)
-                    {
-                        //Reset wallpaper variables
-                        vWallpaperFilesize = 0;
-
-                        //Hide wallpaper preview
-                        AVActions.ActionDispatcherInvoke(delegate
+                        //Check for current jpg wallpaper file
+                        string WallpaperLocationJpg = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.jpg";
+                        bool WallpaperLocationJpgExists = File.Exists(WallpaperLocationJpg);
+                        if (WallpaperLocationJpgExists)
                         {
-                            sp_TimeMeWallpaper.Visibility = Visibility.Collapsed;
-                        });
+                            CheckAndSetWallpaper(WallpaperLocationJpg);
+                        }
+
+                        //Check for current png wallpaper file
+                        string WallpaperLocationPng = Environment.GetEnvironmentVariable("LocalAppData") + @"\Packages\54655ArnoldVink.TimeMeTile_hky69t2svm98c\LocalState\TimeMeTilePhoto.png";
+                        bool WallpaperLocationPngExists = File.Exists(WallpaperLocationPng);
+                        if (WallpaperLocationPngExists)
+                        {
+                            CheckAndSetWallpaper(WallpaperLocationPng);
+                        }
+
+                        //Check if the wallpaper exists
+                        if (!WallpaperLocationJpgExists && !WallpaperLocationPngExists)
+                        {
+                            //Reset wallpaper variables
+                            vWallpaperFilesize = 0;
+
+                            //Hide wallpaper preview
+                            AVActions.ActionDispatcherInvoke(delegate
+                            {
+                                sp_TimeMeWallpaper.Visibility = Visibility.Collapsed;
+                            });
+                        }
                     }
+                    catch { }
 
                     //Delay the loop task
-                    await TaskDelayLoop(600000, vTask_Wallpaper);
+                    TaskDelayLoop(600000, vTask_Wallpaper);
                 }
             }
             catch { }
-            finally
-            {
-                vTask_Wallpaper.Status = AVTaskStatus.Stopped;
-            }
+            return Task.FromResult(0);
         }
 
         private void CheckAndSetWallpaper(string WallpaperLocation)
@@ -82,6 +84,7 @@ namespace ArnoldVinkTools
                     //Update wallpaper preview
                     AVActions.ActionDispatcherInvoke(delegate
                     {
+                        //Show wallpaper preview
                         sp_TimeMeWallpaper.Visibility = Visibility.Visible;
 
                         //Load the wallpaper as bitmapimage
