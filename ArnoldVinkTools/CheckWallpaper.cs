@@ -15,7 +15,7 @@ namespace ArnoldVinkTools
     partial class MainPage
     {
         //Loop check for TimeMe wallpaper
-        Task LoopCheckWallpaper()
+        async Task LoopCheckWallpaper()
         {
             try
             {
@@ -57,11 +57,10 @@ namespace ArnoldVinkTools
                     catch { }
 
                     //Delay the loop task
-                    TaskDelayLoop(600000, vTask_Wallpaper);
+                    await TaskDelayLoop(600000, vTask_Wallpaper);
                 }
             }
             catch { }
-            return Task.FromResult(0);
         }
 
         private void CheckAndSetWallpaper(string WallpaperLocation)
