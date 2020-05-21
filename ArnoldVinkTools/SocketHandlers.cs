@@ -42,7 +42,7 @@ namespace ArnoldVinkTools
 
                 //Prepare response message
                 string[] SocketData = StringReceived.Split('‡');
-                string StringResponse = SocketStringHandle(SocketData);
+                string StringResponse = await SocketStringHandle(SocketData);
                 byte[] bytesResponse = Encoding.UTF8.GetBytes(StringResponse);
 
                 //Return response message
@@ -52,7 +52,7 @@ namespace ArnoldVinkTools
         }
 
         //Handle received socket string
-        public string SocketStringHandle(string[] socketStringArray)
+        public async Task<string> SocketStringHandle(string[] socketStringArray)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace ArnoldVinkTools
                 }
                 else
                 {
-                    CommandKey(socketStringArray[0]);
+                    await CommandKey(socketStringArray[0]);
                 }
             }
             catch { }
