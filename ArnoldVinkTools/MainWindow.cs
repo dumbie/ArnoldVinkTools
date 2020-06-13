@@ -21,7 +21,7 @@ namespace ArnoldVinkTools
             try
             {
                 //Initialize application
-                Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", false, false);
+                Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", ProcessPriorityClass.Normal, false);
 
                 //Create the tray menu
                 Application_CreateTrayMenu();

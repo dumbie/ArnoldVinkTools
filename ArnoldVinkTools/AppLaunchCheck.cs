@@ -8,7 +8,7 @@ namespace ArnoldVinkTools
 {
     public partial class AppLaunchCheck
     {
-        public static void Application_LaunchCheck(string ApplicationName, string ProcessName, bool PriorityRealTime, bool skipFileCheck)
+        public static void Application_LaunchCheck(string ApplicationName, string ProcessName, ProcessPriorityClass ProcessPriority, bool skipFileCheck)
         {
             try
             {
@@ -25,11 +25,12 @@ namespace ArnoldVinkTools
                 //Set the working directory to executable directory
                 Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
 
-                //Set the application priority to realtime
-                if (PriorityRealTime)
+                //Set the application priority level
+                try
                 {
-                    Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
+                    Process.GetCurrentProcess().PriorityClass = ProcessPriority;
                 }
+                catch { }
 
                 //Check for missing application files
                 if (!skipFileCheck)

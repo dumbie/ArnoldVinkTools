@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using static AppImport.AppImport;
+using static ArnoldVinkCode.AVInteropDll;
 using static ArnoldVinkCode.AVActions;
 using static ArnoldVinkTools.AppVariables;
 
@@ -63,13 +63,13 @@ namespace ArnoldVinkTools
             catch { }
         }
 
-        private void CheckAndSetWallpaper(string WallpaperLocation)
+        private void CheckAndSetWallpaper(string wallpaperLocation)
         {
             try
             {
                 //Set and check current wallpaper file size
                 long WallpaperFilesizeOld = vWallpaperFilesize;
-                vWallpaperFilesize = new FileInfo(WallpaperLocation).Length;
+                vWallpaperFilesize = new FileInfo(wallpaperLocation).Length;
                 if (WallpaperFilesizeOld != vWallpaperFilesize)
                 {
                     //Set Registery to Stretch
@@ -78,7 +78,7 @@ namespace ArnoldVinkTools
                     WallRegistryKey.SetValue("TileWallpaper", "0");
 
                     //Set current TimeMe Wallpaper
-                    SystemParametersInfo(20, 0, WallpaperLocation, 0x1);
+                    SystemParametersInfo(SPI.SPI_SETDESKWALLPAPER, 0, wallpaperLocation, SPIF.SPIF_UPDATEINIFILE);
 
                     //Update wallpaper preview
                     AVActions.ActionDispatcherInvoke(delegate
@@ -90,7 +90,7 @@ namespace ArnoldVinkTools
                         BitmapImage ImageToBitmapImage = new BitmapImage();
                         ImageToBitmapImage.BeginInit();
                         ImageToBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                        ImageToBitmapImage.UriSource = new Uri(WallpaperLocation, UriKind.RelativeOrAbsolute);
+                        ImageToBitmapImage.UriSource = new Uri(wallpaperLocation, UriKind.RelativeOrAbsolute);
                         ImageToBitmapImage.EndInit();
                         image_TimeMeWallpaper.Source = ImageToBitmapImage;
                     });
