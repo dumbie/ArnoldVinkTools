@@ -6,8 +6,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using static ArnoldVinkCode.AVInteropDll;
 using static ArnoldVinkCode.AVActions;
+using static ArnoldVinkCode.AVInteropDll;
 using static ArnoldVinkTools.AppVariables;
 
 namespace ArnoldVinkTools

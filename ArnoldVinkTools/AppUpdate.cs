@@ -1,8 +1,7 @@
-﻿using ArnoldVinkCode;
-using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using static ArnoldVinkCode.ApiGitHub;
 using static ArnoldVinkCode.ProcessWin32Functions;
 using static ArnoldVinkTools.AppVariables;
 
@@ -19,11 +18,11 @@ namespace ArnoldVinkTools
                 {
                     vCheckingForUpdate = true;
 
-                    //Download Current Version
-                    string ResCurrentVersion = await AVDownloader.DownloadStringAsync(5000, "Arnold Vink Tools", null, new Uri("https://download.arnoldvink.com/ArnoldVinkTools.zip-version.txt" + "?nc=" + Environment.TickCount));
-                    if (!string.IsNullOrWhiteSpace(ResCurrentVersion) && ResCurrentVersion != Assembly.GetEntryAssembly().FullName.Split('=')[1].Split(',')[0])
+                    string onlineVersion = await ApiGitHub_GetLatestVersion("dumbie", "ArnoldVinkTools");
+                    string currentVersion = "v" + Assembly.GetEntryAssembly().FullName.Split('=')[1].Split(',')[0];
+                    if (!string.IsNullOrWhiteSpace(onlineVersion) && onlineVersion != currentVersion)
                     {
-                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: v" + ResCurrentVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
+                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: " + onlineVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
                         if (Result == MessageBoxResult.Yes)
                         {
                             await ProcessLauncherWin32Async("Updater.exe", "", "", false, false);

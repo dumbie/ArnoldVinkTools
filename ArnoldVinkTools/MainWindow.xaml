@@ -19,7 +19,7 @@
 
         <!-- Listbox Menu -->
         <Grid Grid.Column="0" Background="{DynamicResource ApplicationAccentLightBrush}">
-            <ListBox Name="lb_SettingsListBox" Width="150" SelectedIndex="0" SelectionMode="Single" Style="{StaticResource ListBoxVertical}">
+            <ListBox Name="lb_SettingsListBox" Width="150" SelectedIndex="0" SelectionMode="Single" ItemContainerStyle="{StaticResource ListBoxItemWhite}" Style="{StaticResource ListBoxVertical}">
                 <ListBoxItem>
                     <TextBlock Text="General" Style="{StaticResource TextBlockWhite}"/>
                 </ListBoxItem>

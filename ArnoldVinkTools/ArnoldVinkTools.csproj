@@ -45,6 +45,9 @@
     <StartupObject>ArnoldVinkTools.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -62,6 +65,7 @@
     </Reference>
     <Reference Include="Windows">
       <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -72,6 +76,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Api\GitHub\Classes.cs">
+      <Link>ArnoldVinkCode\Api\GitHub\Classes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Api\GitHub\GitHub_Paths.cs">
+      <Link>ArnoldVinkCode\Api\GitHub\GitHub_Paths.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Api\GitHub\GitHub_Version.cs">
+      <Link>ArnoldVinkCode\Api\GitHub\GitHub_Version.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\ArnoldVinkActions\AVActions.cs">
       <Link>ArnoldVinkCode\Functions\ArnoldVinkActions\AVActions.cs</Link>
     </Compile>
@@ -135,6 +148,9 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVDownloader.cs">
       <Link>ArnoldVinkCode\Functions\AVDownloader.cs</Link>
     </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVFiles.cs">
+      <Link>ArnoldVinkCode\Functions\AVFiles.cs</Link>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Functions\AVFirewall.cs">
       <Link>ArnoldVinkCode\Functions\AVFirewall.cs</Link>
     </Compile>
@@ -163,8 +179,38 @@
     <Compile Include="SocketHandlers.cs" />
     <Compile Include="TrayMenu.cs" />
     <Compile Include="WhitelistApps.cs" />
-    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates.xaml">
-      <Link>Styles\ControlTemplates.xaml</Link>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Button.xaml">
+      <Link>Styles\ControlTemplates\Button.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\CheckBox.xaml">
+      <Link>Styles\ControlTemplates\CheckBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ComboBox.xaml">
+      <Link>Styles\ControlTemplates\ComboBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ListBox.xaml">
+      <Link>Styles\ControlTemplates\ListBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Scrollbar.xaml">
+      <Link>Styles\ControlTemplates\Scrollbar.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Slider.xaml">
+      <Link>Styles\ControlTemplates\Slider.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\TextBox.xaml">
+      <Link>Styles\ControlTemplates\TextBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -200,6 +246,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\App.config">
       <SubType>Designer</SubType>
     </None>

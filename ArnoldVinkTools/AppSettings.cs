@@ -23,12 +23,6 @@ namespace ArnoldVinkTools
                     SettingSave("ServerPort", "1000");
                 }
 
-                //Check - Last update check
-                if (ConfigurationManager.AppSettings["AppUpdateCheck"] == null)
-                {
-                    SettingSave("AppUpdateCheck", DateTime.Now.ToString(vAppCultureInfo));
-                }
-
                 //Check - TimeMe Wallpaper
                 if (ConfigurationManager.AppSettings["TimeMeWallpaper"] == null)
                 {

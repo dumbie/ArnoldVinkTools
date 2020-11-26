@@ -44,10 +44,7 @@ namespace ArnoldVinkTools
                 TasksBackgroundStart();
 
                 //Check for available application update
-                if (DateTime.Now.Subtract(DateTime.Parse(ConfigurationManager.AppSettings["AppUpdateCheck"], vAppCultureInfo)).Days >= 5)
-                {
-                    await AppUpdate.CheckForAppUpdate(true);
-                }
+                await AppUpdate.CheckForAppUpdate(true);
 
                 Debug.WriteLine("Application has launched.");
             }
