@@ -12,7 +12,7 @@ namespace ArnoldVinkTools
     partial class MainPage
     {
         //Handle received socket data
-        public async Task ReceivedSocketHandler(TcpClient tcpClient, byte[] receivedBytes)
+        public async Task ReceivedSocketHandler(TcpClient tcpClient, IPEndPoint endPoint, byte[] receivedBytes)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace ArnoldVinkTools
                 byte[] bytesResponse = Encoding.UTF8.GetBytes(StringResponse);
 
                 //Return response message
-                await vArnoldVinkSockets.TcpClientSendBytes(tcpClient, bytesResponse, vArnoldVinkSockets.vTcpClientTimeout, false);
+                await vArnoldVinkSockets.TcpClientSendBytes(tcpClient, bytesResponse, vArnoldVinkSockets.vSocketTimeout, false);
             }
             catch { }
         }

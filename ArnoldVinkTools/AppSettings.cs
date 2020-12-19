@@ -85,7 +85,7 @@ namespace ArnoldVinkTools
                     SettingSave("ServerPort", txt_ServerPort.Text);
 
                     //Restart the socket server
-                    vArnoldVinkSockets.vTcpListenerPort = Convert.ToInt32(txt_ServerPort.Text);
+                    vArnoldVinkSockets.vSocketServerPort = Convert.ToInt32(txt_ServerPort.Text);
                     await vArnoldVinkSockets.SocketServerRestart();
                 };
 
