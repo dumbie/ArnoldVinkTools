@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media;
 using static ArnoldVinkTools.AppVariables;
 
 namespace ArnoldVinkTools
@@ -48,9 +49,9 @@ namespace ArnoldVinkTools
                 string TargetFileStartup_Normal = Environment.GetFolderPath(Environment.SpecialFolder.Startup) + "\\" + TargetName_Normal + ".url";
                 if (File.Exists(TargetFileStartup_Normal)) { cb_StartupWindows.IsChecked = true; }
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("SettingsLoadError: " + Ex.Message, "Arnold Vink Tools");
+                Debug.WriteLine("Failed to load the settings: " + ex.Message);
             }
         }
 
@@ -62,27 +63,23 @@ namespace ArnoldVinkTools
                 //Save - Server Port
                 txt_ServerPort.TextChanged += async (sender, e) =>
                 {
-                    if (string.IsNullOrWhiteSpace(txt_ServerPort.Text)) { return; }
+                    //Color brushes
+                    BrushConverter BrushConvert = new BrushConverter();
+                    Brush BrushInvalid = BrushConvert.ConvertFromString("#cd1a2b") as Brush;
+                    Brush BrushValid = BrushConvert.ConvertFromString("#1db954") as Brush;
 
-                    if (Regex.IsMatch(txt_ServerPort.Text, "(\\D+)"))
-                    {
-                        MessageBox.Show("Please enter a valid server port number.", "Arnold Vink Tools");
-                        return;
-                    }
+                    //Check text input and length
+                    if (string.IsNullOrWhiteSpace(txt_ServerPort.Text)) { txt_ServerPort.BorderBrush = BrushInvalid; return; }
 
-                    if (txt_ServerPort.Text.StartsWith("0"))
-                    {
-                        MessageBox.Show("Please enter a valid server port number,\nThe server port cannot start with a 0.", "Arnold Vink Tools");
-                        return;
-                    }
+                    //Check text input has invalid characters
+                    if (Regex.IsMatch(txt_ServerPort.Text, "(\\D+)")) { txt_ServerPort.BorderBrush = BrushInvalid; return; }
 
-                    if (Convert.ToInt32(txt_ServerPort.Text) < 1 || Convert.ToInt32(txt_ServerPort.Text) > 65535)
-                    {
-                        MessageBox.Show("Please enter a valid server port number,\nYou can use a port between 1 and 65535.", "Arnold Vink Tools");
-                        return;
-                    }
+                    //Check text input number
+                    int ServerPort = Convert.ToInt32(txt_ServerPort.Text);
+                    if (ServerPort < 1 || ServerPort > 65535) { txt_ServerPort.BorderBrush = BrushInvalid; return; }
 
                     SettingSave("ServerPort", txt_ServerPort.Text);
+                    txt_ServerPort.BorderBrush = BrushValid;
 
                     //Restart the socket server
                     vArnoldVinkSockets.vSocketServerPort = Convert.ToInt32(txt_ServerPort.Text);
@@ -113,9 +110,9 @@ namespace ArnoldVinkTools
                 //Save - Windows Startup
                 cb_StartupWindows.Click += (sender, e) => { ManageShortcutStartup(); };
             }
-            catch (Exception Ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("SettingsSaveError: " + Ex.Message, "Arnold Vink Tools");
+                Debug.WriteLine("Failed to save the settings: " + ex.Message);
             }
         }
 

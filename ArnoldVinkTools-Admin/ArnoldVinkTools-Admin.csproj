@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ArnoldVinkTools_Admin</RootNamespace>
     <AssemblyName>ArnoldVinkTools-Admin</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -51,8 +51,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.9.0.0, Culture=neutral, PublicKeyToken=e25603a88b3aa7da, processorArchitecture=MSIL">
-      <HintPath>..\packages\TaskScheduler.2.9.0\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
+    <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.9.1.0, Culture=neutral, PublicKeyToken=e25603a88b3aa7da, processorArchitecture=MSIL">
+      <HintPath>..\packages\TaskScheduler.2.9.1\lib\net452\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -70,7 +70,7 @@
     </Reference>
     <Reference Include="Windows, Version=255.255.255.255, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd</HintPath>
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -126,6 +126,12 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Interop\AVInteropDll.cs">
       <Link>ArnoldVinkCode\Interop\AVInteropDll.cs</Link>
     </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Styles\ArnoldVinkMessageBox\MessageBox.xaml.cs">
+      <Link>ArnoldVinkCode\Styles\ArnoldVinkMessageBox\MessageBox.xaml.cs</Link>
+    </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Styles\MainStyles.xaml.cs">
+      <Link>ArnoldVinkCode\Styles\MainStyles.xaml.cs</Link>
+    </Compile>
     <Compile Include="..\ArnoldVinkTools\Properties\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
@@ -144,6 +150,57 @@
   <ItemGroup>
     <Resource Include="Assets\AppIcon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ArnoldVinkMessageBox\MessageBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ArnoldVinkMessageBox\MessageBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Button.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Button.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\CheckBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\CheckBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ComboBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\ComboBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ListBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\ListBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Scrollbar.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Scrollbar.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Slider.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Slider.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\TextBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\TextBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\MainColors.xaml">
+      <Link>ArnoldVinkCode\Styles\MainColors.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\MainStyles.xaml">
+      <Link>ArnoldVinkCode\Styles\MainStyles.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArnoldVinkTools</RootNamespace>
     <AssemblyName>ArnoldVinkTools</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -45,8 +45,8 @@
     <StartupObject>ArnoldVinkTools.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -64,7 +64,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Windows">
-      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd</HintPath>
+      <HintPath>C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -181,8 +181,12 @@
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Interop\AVInteropDll.cs">
       <Link>ArnoldVinkCode\Interop\AVInteropDll.cs</Link>
     </Compile>
+    <Compile Include="..\..\ArnoldVinkCode\Desktop\Styles\ArnoldVinkMessageBox\MessageBox.xaml.cs">
+      <Link>ArnoldVinkCode\Styles\ArnoldVinkMessageBox\MessageBox.xaml.cs</Link>
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\..\ArnoldVinkCode\Desktop\Styles\MainStyles.xaml.cs">
-      <Link>Styles\MainStyles.xaml.cs</Link>
+      <Link>ArnoldVinkCode\Styles\MainStyles.xaml.cs</Link>
       <DependentUpon>MainStyles.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppLaunchCheck.cs" />
@@ -197,48 +201,53 @@
     <Compile Include="SocketHandlers.cs" />
     <Compile Include="TrayMenu.cs" />
     <Compile Include="WhitelistApps.cs" />
+    <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ArnoldVinkMessageBox\MessageBox.xaml">
+      <Link>ArnoldVinkCode\Styles\ArnoldVinkMessageBox\MessageBox.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Button.xaml">
-      <Link>Styles\ControlTemplates\Button.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Button.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\CheckBox.xaml">
-      <Link>Styles\ControlTemplates\CheckBox.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\CheckBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ComboBox.xaml">
-      <Link>Styles\ControlTemplates\ComboBox.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\ComboBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\ListBox.xaml">
-      <Link>Styles\ControlTemplates\ListBox.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\ListBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Scrollbar.xaml">
-      <Link>Styles\ControlTemplates\Scrollbar.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Scrollbar.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\Slider.xaml">
-      <Link>Styles\ControlTemplates\Slider.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\Slider.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\ControlTemplates\TextBox.xaml">
-      <Link>Styles\ControlTemplates\TextBox.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\ControlTemplates\TextBox.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\MainColors.xaml">
-      <Link>Styles\MainColors.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\MainColors.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\..\ArnoldVinkCode\Desktop\Styles\MainStyles.xaml">
-      <Link>Styles\MainStyles.xaml</Link>
+      <Link>ArnoldVinkCode\Styles\MainStyles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -283,9 +292,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\AppIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)SignToolExe.exe</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release ($(SolutionDir)SignToolExe.exe)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -46,7 +46,7 @@
                 <CheckBox Margin="0,15,0,0" Name="cb_StartupWindows" Content="Launch on Windows startup." Style="{StaticResource CheckBoxBlack}"/>
 
                 <Button Name="btn_CheckVersion" Style="{StaticResource ButtonAccentBlack}" Margin="0,15,0,0" Content="Check for new update" Click="btn_CheckVersion_Click"/>
-                <Button Name="btn_ShowIpAdres" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Show my IP adres" Click="btn_ShowIpAdres_Click"/>
+                <Button Name="btn_ShowIpAdres" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Show my IP addresses" Click="btn_ShowIpAdres_Click"/>
                 <Button Name="btn_RestartTools" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Restart the tools" Click="btn_RestartTools_Click"/>
                 <Button Name="btn_ProjectWebsite" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Project website" Click="btn_ProjectWebsite_Click"/>
                 <Button Name="btn_ExitTools" Style="{StaticResource ButtonAccentBlack}" Margin="0,5,0,0" Content="Exit the tools" Click="btn_ExitTools_Click"/>

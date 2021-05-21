@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using ArnoldVinkCode;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using static ArnoldVinkCode.ApiGitHub;
@@ -22,8 +24,12 @@ namespace ArnoldVinkTools
                     string currentVersion = "v" + Assembly.GetEntryAssembly().FullName.Split('=')[1].Split(',')[0];
                     if (!string.IsNullOrWhiteSpace(onlineVersion) && onlineVersion != currentVersion)
                     {
-                        MessageBoxResult Result = MessageBox.Show("A newer version has been found: " + onlineVersion + ", do you want to update the application to the newest version now?", "Arnold Vink Tools", MessageBoxButton.YesNo);
-                        if (Result == MessageBoxResult.Yes)
+                        List<string> MsgBoxAnswers = new List<string>();
+                        MsgBoxAnswers.Add("Update");
+                        MsgBoxAnswers.Add("Cancel");
+
+                        string MsgBoxResult = await new AVMessageBox().Popup(null, "A newer version has been found: " + onlineVersion, "Would you like to update the application to the newest version available?", MsgBoxAnswers);
+                        if (MsgBoxResult == "Update")
                         {
                             await ProcessLauncherWin32Async("Updater.exe", "", "", false, false);
                             await App.vMainPage.Application_Exit();
@@ -33,7 +39,10 @@ namespace ArnoldVinkTools
                     {
                         if (!Silent)
                         {
-                            MessageBox.Show("No new application update has been found.", "Arnold Vink Tools");
+                            List<string> MsgBoxAnswers = new List<string>();
+                            MsgBoxAnswers.Add("Ok");
+
+                            await new AVMessageBox().Popup(null, "No new application update has been found.", "", MsgBoxAnswers);
                         }
                     }
 
@@ -45,7 +54,10 @@ namespace ArnoldVinkTools
                 vCheckingForUpdate = false;
                 if (!Silent)
                 {
-                    MessageBox.Show("Failed to check for the latest application version,\nplease check your internet connection and try again.", "Arnold Vink Tools");
+                    List<string> MsgBoxAnswers = new List<string>();
+                    MsgBoxAnswers.Add("Ok");
+
+                    await new AVMessageBox().Popup(null, "Failed to check for the latest application version", "Please check your internet connection and try again.", MsgBoxAnswers);
                 }
             }
         }

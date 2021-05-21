@@ -1,5 +1,6 @@
 ﻿using ArnoldVinkCode;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -21,7 +22,7 @@ namespace ArnoldVinkTools
             try
             {
                 //Initialize application
-                Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", ProcessPriorityClass.Normal, false);
+                await Application_LaunchCheck("Arnold Vink Tools", "ArnoldVinkTools", ProcessPriorityClass.Normal, false);
 
                 //Create the tray menu
                 Application_CreateTrayMenu();
@@ -99,12 +100,12 @@ namespace ArnoldVinkTools
             catch { }
         }
 
-        //Show the PC's detected ip adres
-        private void btn_ShowIpAdres_Click(object sender, RoutedEventArgs e)
+        //Show the device detected ip addresses
+        private async void btn_ShowIpAdres_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string LocalIpAdresses = String.Empty;
+                string LocalIpAdresses = string.Empty;
 
                 IPHostEntry IPHostEntry = Dns.GetHostEntry(Dns.GetHostName());
                 foreach (IPAddress IPAddress in IPHostEntry.AddressList)
@@ -115,10 +116,13 @@ namespace ArnoldVinkTools
                     }
                 }
 
-                if (LocalIpAdresses == String.Empty) { LocalIpAdresses = "Unknown"; }
+                if (LocalIpAdresses == string.Empty) { LocalIpAdresses = "Unknown"; }
                 else { LocalIpAdresses = AVFunctions.StringRemoveEnd(LocalIpAdresses, ", "); }
 
-                MessageBox.Show("Your PC's detected ip adres is currently set to: " + LocalIpAdresses, "Arnold Vink Tools");
+                List<string> messageAnswers = new List<string>();
+                messageAnswers.Add("Ok");
+
+                await new AVMessageBox().Popup(this, "Device IP addresses", "Currently detected IP addresses: " + LocalIpAdresses, messageAnswers);
             }
             catch { }
         }
