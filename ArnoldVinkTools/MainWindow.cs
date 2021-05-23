@@ -38,29 +38,29 @@ namespace ArnoldVinkTools
                 //Whitelist supported windows store apps
                 WhitelistApps();
 
-                //Enable the socket server
-                EnableSocketServer();
-
                 //Start the background tasks
                 TasksBackgroundStart();
 
+                //Enable the socket server
+                await EnableSocketServer();
+
                 //Check for available application update
                 await AppUpdate.CheckForAppUpdate(true);
-
-                Debug.WriteLine("Application has launched.");
             }
             catch { }
         }
 
         //Enable the socket server
-        private void EnableSocketServer()
+        private async Task EnableSocketServer()
         {
             try
             {
                 int SocketServerPort = Convert.ToInt32(ConfigurationManager.AppSettings["ServerPort"]);
 
                 vArnoldVinkSockets = new ArnoldVinkSockets("127.0.0.1", SocketServerPort, true, false);
+                vArnoldVinkSockets.vSocketTimeout = 2000;
                 vArnoldVinkSockets.EventBytesReceived += ReceivedSocketHandler;
+                await vArnoldVinkSockets.SocketServerEnable();
             }
             catch { }
         }

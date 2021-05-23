@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows;
 using static ArnoldVinkCode.ApiGitHub;
 using static ArnoldVinkCode.ProcessWin32Functions;
 using static ArnoldVinkTools.AppVariables;
